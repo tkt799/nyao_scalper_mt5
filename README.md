@@ -208,6 +208,8 @@ Pre-configured settings files are available in the `settings/` folder. Load them
 
 > **Stop Loss units are now consistent** across all profiles — every profile uses `SLInputType = Percent of Equity`, so per-trade risk is comparable and scales with account size. (In v41 the SL unit type varied by profile, which made the magnitudes contradict each profile's stated philosophy.) Per-trade SL × Max Open Orders is kept roughly in line with each profile's Basket Stop.
 
+> **⚠️ Independent back-test note (2026-10):** a research harness under [`research/`](research/) re-implements this EA's decision logic and replays it over **3 months of real broker XAUUSD M1/M5 data** (3 datasets, rolling monthly windows, broker spread modelled). Headline findings: only the **`safe`** profile stayed positive on all three datasets; `aggressive` / `safe-aggressive` / `default` / `balanced` lost money on both M1 tapes (max drawdowns 55–103%), and **turning the hedge chain off** flipped `default` from −$696 to **+$3,918** with the max drawdown going **86.5% → 8.2%**. A walk-forward-validated parameter set is shipped at [`research/recommended_settings/tuned-lowrisk-nomartingale.set`](research/recommended_settings/tuned-lowrisk-nomartingale.set). Full report (Chinese) + reproduction commands: [`research/BACKTEST_REPORT_zh.md`](research/BACKTEST_REPORT_zh.md).
+
 ### Recommended Profile by Account Size
 
 | Account Size | Recommended | Notes |

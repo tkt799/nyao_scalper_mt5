@@ -8,3 +8,10 @@
 
 # Editor / extension local files
 .vscode/buraq-diagnostics.json
+
+# Research harness — normalized market data & local virtualenvs (see research/README.md)
+research/data/*.csv
+research/venv/
+research/results/equity_curves_cache.csv
+__pycache__/
+*.pyc

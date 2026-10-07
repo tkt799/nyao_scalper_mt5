@@ -1,0 +1,23 @@
+{
+  "name": "xauusd_m1_ftmo",
+  "symbol": "XAUUSD",
+  "source": "ftmo",
+  "point": 0.01,
+  "digits": 2,
+  "contract_size": 100.0,
+  "tick_value": 1.0,
+  "tick_size": 0.01,
+  "volume_min": 0.01,
+  "volume_max": 100.0,
+  "volume_step": 0.01,
+  "spread_model": "FTMO hourly median (p50)",
+  "spread_mean_price": 0.4472383062572058,
+  "spread_p50_price": 0.44583,
+  "trade_start": "2026-02-16",
+  "trade_end": "2026-05-16",
+  "warmup_start": "2026-02-06",
+  "bars_total": 95410,
+  "bars_tradeable": 87220,
+  "first_bar": "2026-02-06 01:05:00",
+  "last_bar": "2026-05-15 23:49:00"
+}

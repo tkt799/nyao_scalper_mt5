@@ -1,0 +1,23 @@
+{
+  "name": "xauusd_m1_2026H2",
+  "symbol": "XAUUSD",
+  "source": "vudo805",
+  "point": 0.001,
+  "digits": 3,
+  "contract_size": 100.0,
+  "tick_value": 1.0,
+  "tick_size": 0.01,
+  "volume_min": 0.01,
+  "volume_max": 100.0,
+  "volume_step": 0.01,
+  "spread_model": "FTMO hourly median (p50)",
+  "spread_mean_price": 0.4489799343538114,
+  "spread_p50_price": 0.44583,
+  "trade_start": "2026-05-18",
+  "trade_end": "2026-08-17",
+  "warmup_start": "2026-05-08",
+  "bars_total": 97340,
+  "bars_tradeable": 89060,
+  "first_bar": "2026-05-08 00:00:00",
+  "last_bar": "2026-08-16 23:58:00"
+}
