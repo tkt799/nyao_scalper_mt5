@@ -1,0 +1,23 @@
+{
+  "name": "xauusdm_m5_2026H2",
+  "symbol": "XAUUSDm",
+  "source": "m5",
+  "point": 0.001,
+  "digits": 3,
+  "contract_size": 100.0,
+  "tick_value": 1.0,
+  "tick_size": 0.01,
+  "volume_min": 0.01,
+  "volume_max": 100.0,
+  "volume_step": 0.01,
+  "spread_model": "broker <SPREAD> column",
+  "spread_mean_price": 0.2578995187680462,
+  "spread_p50_price": 0.26,
+  "trade_start": "2026-05-18",
+  "trade_end": "2026-08-22",
+  "warmup_start": "2026-05-08",
+  "bars_total": 20780,
+  "bars_tradeable": 19124,
+  "first_bar": "2026-05-08 00:00:00",
+  "last_bar": "2026-08-21 17:05:00"
+}

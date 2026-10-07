@@ -1,0 +1,458 @@
+{
+  "M1-primary": {
+    "2026-05-18..2026-06-17": {
+      "aggressive": {
+        "net": -1039.71,
+        "trades": 133,
+        "dd": 103.01,
+        "pf": 0.48,
+        "win_rate": 69.2,
+        "final": -39.71
+      },
+      "safe-aggressive": {
+        "net": -621.18,
+        "trades": 3165,
+        "dd": 67.2,
+        "pf": 0.93,
+        "win_rate": 69.2,
+        "final": 378.82
+      },
+      "default": {
+        "net": -567.0,
+        "trades": 2660,
+        "dd": 80.31,
+        "pf": 0.92,
+        "win_rate": 64.6,
+        "final": 433.0
+      },
+      "balanced": {
+        "net": -319.37,
+        "trades": 1466,
+        "dd": 52.86,
+        "pf": 0.94,
+        "win_rate": 73.3,
+        "final": 680.63
+      },
+      "safe": {
+        "net": 502.19,
+        "trades": 1018,
+        "dd": 2.81,
+        "pf": 1.43,
+        "win_rate": 77.2,
+        "final": 1502.19
+      },
+      "TUNED": {
+        "net": 3873.89,
+        "trades": 8852,
+        "dd": 6.04,
+        "pf": 1.38,
+        "win_rate": 79.0,
+        "final": 4873.89
+      }
+    },
+    "2026-06-17..2026-07-17": {
+      "aggressive": {
+        "net": -995.11,
+        "trades": 145,
+        "dd": 99.55,
+        "pf": 0.63,
+        "win_rate": 64.8,
+        "final": 4.89
+      },
+      "safe-aggressive": {
+        "net": -677.93,
+        "trades": 2903,
+        "dd": 75.65,
+        "pf": 0.91,
+        "win_rate": 66.9,
+        "final": 322.07
+      },
+      "default": {
+        "net": -520.71,
+        "trades": 2267,
+        "dd": 81.39,
+        "pf": 0.93,
+        "win_rate": 67.8,
+        "final": 479.29
+      },
+      "balanced": {
+        "net": -376.18,
+        "trades": 1486,
+        "dd": 59.53,
+        "pf": 0.95,
+        "win_rate": 74.7,
+        "final": 623.82
+      },
+      "safe": {
+        "net": 312.43,
+        "trades": 726,
+        "dd": 2.93,
+        "pf": 1.39,
+        "win_rate": 77.1,
+        "final": 1312.43
+      },
+      "TUNED": {
+        "net": 2748.34,
+        "trades": 7741,
+        "dd": 4.61,
+        "pf": 1.31,
+        "win_rate": 78.4,
+        "final": 3748.34
+      }
+    },
+    "2026-07-17..2026-08-17": {
+      "aggressive": {
+        "net": -984.7,
+        "trades": 174,
+        "dd": 98.47,
+        "pf": 0.72,
+        "win_rate": 74.1,
+        "final": 15.3
+      },
+      "safe-aggressive": {
+        "net": -474.12,
+        "trades": 2174,
+        "dd": 71.93,
+        "pf": 0.9,
+        "win_rate": 68.4,
+        "final": 525.88
+      },
+      "default": {
+        "net": -604.08,
+        "trades": 1934,
+        "dd": 80.3,
+        "pf": 0.91,
+        "win_rate": 73.8,
+        "final": 395.92
+      },
+      "balanced": {
+        "net": -114.1,
+        "trades": 881,
+        "dd": 38.81,
+        "pf": 0.96,
+        "win_rate": 77.3,
+        "final": 885.9
+      },
+      "safe": {
+        "net": -25.67,
+        "trades": 177,
+        "dd": 3.77,
+        "pf": 0.9,
+        "win_rate": 65.0,
+        "final": 974.33
+      },
+      "TUNED": {
+        "net": 2063.75,
+        "trades": 5370,
+        "dd": 6.45,
+        "pf": 1.37,
+        "win_rate": 79.5,
+        "final": 3063.75
+      }
+    }
+  },
+  "M1-FTMO": {
+    "2026-02-16..2026-03-19": {
+      "aggressive": {
+        "net": -1010.41,
+        "trades": 527,
+        "dd": 100.57,
+        "pf": 0.9,
+        "win_rate": 68.1,
+        "final": -10.41
+      },
+      "safe-aggressive": {
+        "net": -440.52,
+        "trades": 3701,
+        "dd": 57.78,
+        "pf": 0.97,
+        "win_rate": 73.5,
+        "final": 559.48
+      },
+      "default": {
+        "net": -515.32,
+        "trades": 3458,
+        "dd": 81.24,
+        "pf": 0.96,
+        "win_rate": 68.5,
+        "final": 484.68
+      },
+      "balanced": {
+        "net": -247.83,
+        "trades": 2038,
+        "dd": 48.77,
+        "pf": 0.97,
+        "win_rate": 74.3,
+        "final": 752.17
+      },
+      "safe": {
+        "net": 107.9,
+        "trades": 245,
+        "dd": 5.07,
+        "pf": 1.31,
+        "win_rate": 71.4,
+        "final": 1107.9
+      },
+      "TUNED": {
+        "net": 8175.61,
+        "trades": 11345,
+        "dd": 2.92,
+        "pf": 1.58,
+        "win_rate": 80.0,
+        "final": 9175.61
+      }
+    },
+    "2026-03-19..2026-04-17": {
+      "aggressive": {
+        "net": -992.93,
+        "trades": 145,
+        "dd": 99.38,
+        "pf": 0.61,
+        "win_rate": 64.8,
+        "final": 7.07
+      },
+      "safe-aggressive": {
+        "net": 37.02,
+        "trades": 3696,
+        "dd": 68.57,
+        "pf": 1.0,
+        "win_rate": 78.5,
+        "final": 1037.02
+      },
+      "default": {
+        "net": -808.73,
+        "trades": 3458,
+        "dd": 93.19,
+        "pf": 0.95,
+        "win_rate": 70.4,
+        "final": 191.27
+      },
+      "balanced": {
+        "net": -251.79,
+        "trades": 2490,
+        "dd": 74.64,
+        "pf": 0.98,
+        "win_rate": 79.1,
+        "final": 748.21
+      },
+      "safe": {
+        "net": 422.48,
+        "trades": 615,
+        "dd": 4.33,
+        "pf": 1.44,
+        "win_rate": 73.3,
+        "final": 1422.48
+      },
+      "TUNED": {
+        "net": 11395.51,
+        "trades": 11918,
+        "dd": 4.49,
+        "pf": 1.7,
+        "win_rate": 81.1,
+        "final": 12395.51
+      }
+    },
+    "2026-04-17..2026-05-16": {
+      "aggressive": {
+        "net": -980.26,
+        "trades": 1334,
+        "dd": 98.55,
+        "pf": 0.89,
+        "win_rate": 44.8,
+        "final": 19.74
+      },
+      "safe-aggressive": {
+        "net": -580.56,
+        "trades": 2631,
+        "dd": 62.48,
+        "pf": 0.93,
+        "win_rate": 71.9,
+        "final": 419.44
+      },
+      "default": {
+        "net": -648.14,
+        "trades": 2270,
+        "dd": 74.59,
+        "pf": 0.91,
+        "win_rate": 71.9,
+        "final": 351.86
+      },
+      "balanced": {
+        "net": -201.75,
+        "trades": 1189,
+        "dd": 44.95,
+        "pf": 0.95,
+        "win_rate": 78.3,
+        "final": 798.25
+      },
+      "safe": {
+        "net": 423.56,
+        "trades": 695,
+        "dd": 3.19,
+        "pf": 1.53,
+        "win_rate": 76.1,
+        "final": 1423.56
+      },
+      "TUNED": {
+        "net": 3025.95,
+        "trades": 6940,
+        "dd": 3.66,
+        "pf": 1.39,
+        "win_rate": 78.0,
+        "final": 4025.95
+      }
+    }
+  },
+  "M5-vudo": {
+    "2026-05-18..2026-06-19": {
+      "aggressive": {
+        "net": -1026.33,
+        "trades": 306,
+        "dd": 101.04,
+        "pf": 0.82,
+        "win_rate": 84.0,
+        "final": -26.33
+      },
+      "safe-aggressive": {
+        "net": 1686.46,
+        "trades": 1497,
+        "dd": 17.82,
+        "pf": 1.3,
+        "win_rate": 86.8,
+        "final": 2686.46
+      },
+      "default": {
+        "net": 2030.76,
+        "trades": 1438,
+        "dd": 49.56,
+        "pf": 1.33,
+        "win_rate": 88.5,
+        "final": 3030.76
+      },
+      "balanced": {
+        "net": 1844.98,
+        "trades": 1312,
+        "dd": 17.61,
+        "pf": 1.4,
+        "win_rate": 86.4,
+        "final": 2844.98
+      },
+      "safe": {
+        "net": 2324.9,
+        "trades": 1330,
+        "dd": 1.66,
+        "pf": 3.34,
+        "win_rate": 89.5,
+        "final": 3324.9
+      },
+      "TUNED": {
+        "net": 8958.06,
+        "trades": 4397,
+        "dd": 3.98,
+        "pf": 3.53,
+        "win_rate": 90.8,
+        "final": 9958.06
+      }
+    },
+    "2026-06-19..2026-07-20": {
+      "aggressive": {
+        "net": 6930.38,
+        "trades": 3298,
+        "dd": 44.96,
+        "pf": 1.12,
+        "win_rate": 85.9,
+        "final": 7930.38
+      },
+      "safe-aggressive": {
+        "net": 2022.85,
+        "trades": 1623,
+        "dd": 12.11,
+        "pf": 1.33,
+        "win_rate": 88.4,
+        "final": 3022.85
+      },
+      "default": {
+        "net": 511.56,
+        "trades": 1131,
+        "dd": 42.73,
+        "pf": 1.07,
+        "win_rate": 87.2,
+        "final": 1511.56
+      },
+      "balanced": {
+        "net": 1632.03,
+        "trades": 1265,
+        "dd": 22.27,
+        "pf": 1.37,
+        "win_rate": 88.0,
+        "final": 2632.03
+      },
+      "safe": {
+        "net": 1837.64,
+        "trades": 1142,
+        "dd": 1.38,
+        "pf": 3.11,
+        "win_rate": 88.8,
+        "final": 2837.64
+      },
+      "TUNED": {
+        "net": 7070.09,
+        "trades": 3806,
+        "dd": 1.65,
+        "pf": 3.64,
+        "win_rate": 91.4,
+        "final": 8070.09
+      }
+    },
+    "2026-07-20..2026-08-22": {
+      "aggressive": {
+        "net": -980.46,
+        "trades": 458,
+        "dd": 98.93,
+        "pf": 0.87,
+        "win_rate": 80.1,
+        "final": 19.54
+      },
+      "safe-aggressive": {
+        "net": 1798.37,
+        "trades": 1853,
+        "dd": 21.86,
+        "pf": 1.28,
+        "win_rate": 88.2,
+        "final": 2798.37
+      },
+      "default": {
+        "net": 120.2,
+        "trades": 1046,
+        "dd": 68.45,
+        "pf": 1.03,
+        "win_rate": 84.8,
+        "final": 1120.2
+      },
+      "balanced": {
+        "net": 625.66,
+        "trades": 1016,
+        "dd": 25.82,
+        "pf": 1.2,
+        "win_rate": 85.5,
+        "final": 1625.66
+      },
+      "safe": {
+        "net": 2367.74,
+        "trades": 1472,
+        "dd": 1.76,
+        "pf": 3.46,
+        "win_rate": 89.7,
+        "final": 3367.74
+      },
+      "TUNED": {
+        "net": 7108.69,
+        "trades": 4502,
+        "dd": 2.44,
+        "pf": 3.25,
+        "win_rate": 90.2,
+        "final": 8108.69
+      }
+    }
+  }
+}

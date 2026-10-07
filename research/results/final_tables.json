@@ -1,0 +1,2090 @@
+{
+  "loop_windows": {
+    "M1-primary": {
+      "2026-05-18..2026-06-17": {
+        "aggressive": {
+          "net": -1039.71,
+          "net_pct": -103.97,
+          "trades": 133,
+          "win_rate": 69.2,
+          "pf": 0.48,
+          "dd_pct": 103.01,
+          "avg": -7.817,
+          "final": -39.71,
+          "min_equity": -39.71,
+          "reasons": {
+            "sl": 108,
+            "partial_75": 2,
+            "partial_50": 1,
+            "signal_decay": 1,
+            "hedge_covered": 5,
+            "hedge_roll": 4,
+            "hedge_reseed_partial": 4,
+            "hedge_reseed_close_older": 4,
+            "equity_stop": 4
+          }
+        },
+        "safe-aggressive": {
+          "net": -474.31,
+          "net_pct": -47.43,
+          "trades": 8186,
+          "win_rate": 66.2,
+          "pf": 0.97,
+          "dd_pct": 77.18,
+          "avg": -0.058,
+          "final": 525.69,
+          "min_equity": 248.06,
+          "reasons": {
+            "hedge_roll": 151,
+            "sl": 7382,
+            "hedge_covered": 233,
+            "health": 159,
+            "hedge_reseed_partial": 130,
+            "hedge_reseed_close_older": 130,
+            "basket_stop": 1
+          }
+        },
+        "default": {
+          "net": -696.04,
+          "net_pct": -69.6,
+          "trades": 6579,
+          "win_rate": 62.2,
+          "pf": 0.95,
+          "dd_pct": 86.51,
+          "avg": -0.106,
+          "final": 303.96,
+          "min_equity": 159.42,
+          "reasons": {
+            "sl": 6206,
+            "hedge_covered": 104,
+            "health": 78,
+            "hedge_roll": 64,
+            "hedge_reseed_partial": 61,
+            "hedge_reseed_close_older": 61,
+            "basket_stop": 4,
+            "partial_75": 1
+          }
+        },
+        "balanced": {
+          "net": -232.78,
+          "net_pct": -23.28,
+          "trades": 3498,
+          "win_rate": 73.8,
+          "pf": 0.98,
+          "dd_pct": 54.75,
+          "avg": -0.067,
+          "final": 767.22,
+          "min_equity": 486.68,
+          "reasons": {
+            "sl": 2941,
+            "hedge_covered": 169,
+            "health": 121,
+            "hedge_roll": 98,
+            "hedge_reseed_partial": 84,
+            "hedge_reseed_close_older": 84,
+            "partial_75": 1
+          }
+        },
+        "safe": {
+          "net": 474.41,
+          "net_pct": 47.44,
+          "trades": 1202,
+          "win_rate": 76.4,
+          "pf": 1.33,
+          "dd_pct": 4.35,
+          "avg": 0.395,
+          "final": 1474.41,
+          "min_equity": 997.7,
+          "reasons": {
+            "sl": 1013,
+            "tp": 84,
+            "health": 105
+          }
+        },
+        "TUNED": {
+          "net": 8747.17,
+          "net_pct": 874.72,
+          "trades": 22107,
+          "win_rate": 78.9,
+          "pf": 1.35,
+          "dd_pct": 6.04,
+          "avg": 0.396,
+          "final": 9747.17,
+          "min_equity": 999.95,
+          "reasons": {
+            "sl": 21221,
+            "tp": 120,
+            "health": 766
+          }
+        }
+      },
+      "2026-06-17..2026-07-17": {
+        "aggressive": {
+          "net": -995.11,
+          "net_pct": -99.51,
+          "trades": 145,
+          "win_rate": 64.8,
+          "pf": 0.63,
+          "dd_pct": 99.55,
+          "avg": -6.863,
+          "final": 4.89,
+          "min_equity": 4.89,
+          "reasons": {
+            "sl": 67,
+            "partial_75": 10,
+            "partial_50": 5,
+            "hedge_covered": 25,
+            "hedge_roll": 21,
+            "signal_decay": 1,
+            "hedge_reseed_partial": 6,
+            "hedge_reseed_close_older": 6,
+            "equity_stop": 4
+          }
+        },
+        "safe-aggressive": {
+          "net": -474.31,
+          "net_pct": -47.43,
+          "trades": 5047,
+          "win_rate": 66.2,
+          "pf": 0.96,
+          "dd_pct": 75.65,
+          "avg": -0.094,
+          "final": 525.69,
+          "min_equity": 247.85,
+          "reasons": {
+            "sl": 4522,
+            "hedge_covered": 159,
+            "hedge_roll": 106,
+            "hedge_reseed_partial": 85,
+            "hedge_reseed_close_older": 85,
+            "health": 88,
+            "partial_75": 1,
+            "basket_stop": 1
+          }
+        },
+        "default": {
+          "net": -620.96,
+          "net_pct": -62.1,
+          "trades": 4003,
+          "win_rate": 67.6,
+          "pf": 0.94,
+          "dd_pct": 84.96,
+          "avg": -0.155,
+          "final": 379.04,
+          "min_equity": 156.13,
+          "reasons": {
+            "sl": 3596,
+            "hedge_covered": 145,
+            "hedge_roll": 75,
+            "hedge_reseed_partial": 56,
+            "hedge_reseed_close_older": 56,
+            "health": 69,
+            "partial_75": 3,
+            "basket_stop": 3
+          }
+        },
+        "balanced": {
+          "net": -230.41,
+          "net_pct": -23.04,
+          "trades": 2299,
+          "win_rate": 75.0,
+          "pf": 0.97,
+          "dd_pct": 67.3,
+          "avg": -0.1,
+          "final": 769.59,
+          "min_equity": 460.48,
+          "reasons": {
+            "sl": 1897,
+            "health": 85,
+            "hedge_roll": 72,
+            "hedge_reseed_partial": 57,
+            "hedge_reseed_close_older": 57,
+            "hedge_covered": 131
+          }
+        },
+        "safe": {
+          "net": 464.82,
+          "net_pct": 46.48,
+          "trades": 1199,
+          "win_rate": 76.6,
+          "pf": 1.34,
+          "dd_pct": 4.25,
+          "avg": 0.388,
+          "final": 1464.82,
+          "min_equity": 991.65,
+          "reasons": {
+            "sl": 1020,
+            "tp": 70,
+            "health": 109
+          }
+        },
+        "TUNED": {
+          "net": 4865.4,
+          "net_pct": 486.54,
+          "trades": 13212,
+          "win_rate": 78.9,
+          "pf": 1.33,
+          "dd_pct": 4.61,
+          "avg": 0.368,
+          "final": 5865.4,
+          "min_equity": 986.2,
+          "reasons": {
+            "sl": 12655,
+            "health": 485,
+            "tp": 72
+          }
+        }
+      },
+      "2026-07-17..2026-08-17": {
+        "aggressive": {
+          "net": -984.7,
+          "net_pct": -98.47,
+          "trades": 174,
+          "win_rate": 74.1,
+          "pf": 0.72,
+          "dd_pct": 98.47,
+          "avg": -5.659,
+          "final": 15.3,
+          "min_equity": 15.3,
+          "reasons": {
+            "sl": 93,
+            "hedge_roll": 31,
+            "hedge_covered": 29,
+            "hedge_reseed_partial": 7,
+            "hedge_reseed_close_older": 7,
+            "partial_75": 2,
+            "partial_50": 1,
+            "equity_stop": 4
+          }
+        },
+        "safe-aggressive": {
+          "net": -474.12,
+          "net_pct": -47.41,
+          "trades": 2174,
+          "win_rate": 68.4,
+          "pf": 0.9,
+          "dd_pct": 71.93,
+          "avg": -0.218,
+          "final": 525.88,
+          "min_equity": 280.79,
+          "reasons": {
+            "sl": 1898,
+            "health": 53,
+            "hedge_roll": 57,
+            "hedge_reseed_partial": 46,
+            "hedge_reseed_close_older": 46,
+            "hedge_covered": 72,
+            "basket_stop": 2
+          }
+        },
+        "default": {
+          "net": -604.13,
+          "net_pct": -60.41,
+          "trades": 1934,
+          "win_rate": 73.8,
+          "pf": 0.91,
+          "dd_pct": 80.3,
+          "avg": -0.312,
+          "final": 395.87,
+          "min_equity": 259.34,
+          "reasons": {
+            "sl": 1602,
+            "hedge_covered": 142,
+            "health": 53,
+            "hedge_roll": 64,
+            "hedge_reseed_partial": 35,
+            "hedge_reseed_close_older": 35,
+            "partial_75": 3
+          }
+        },
+        "balanced": {
+          "net": -114.1,
+          "net_pct": -11.41,
+          "trades": 881,
+          "win_rate": 77.3,
+          "pf": 0.96,
+          "dd_pct": 38.81,
+          "avg": -0.13,
+          "final": 885.9,
+          "min_equity": 642.99,
+          "reasons": {
+            "sl": 715,
+            "health": 36,
+            "hedge_covered": 54,
+            "hedge_roll": 26,
+            "hedge_reseed_partial": 25,
+            "hedge_reseed_close_older": 25
+          }
+        },
+        "safe": {
+          "net": -25.67,
+          "net_pct": -2.57,
+          "trades": 177,
+          "win_rate": 65.0,
+          "pf": 0.9,
+          "dd_pct": 3.77,
+          "avg": -0.145,
+          "final": 974.33,
+          "min_equity": 974.23,
+          "reasons": {
+            "sl": 159,
+            "tp": 7,
+            "health": 11
+          }
+        },
+        "TUNED": {
+          "net": 2066.05,
+          "net_pct": 206.6,
+          "trades": 5370,
+          "win_rate": 79.5,
+          "pf": 1.37,
+          "dd_pct": 6.45,
+          "avg": 0.385,
+          "final": 3066.05,
+          "min_equity": 979.79,
+          "reasons": {
+            "sl": 5133,
+            "health": 211,
+            "tp": 24,
+            "partial_75": 2
+          }
+        }
+      }
+    },
+    "M1-FTMO": {
+      "2026-05-18..2026-06-17": {
+        "aggressive": {
+          "net": -1239.78,
+          "net_pct": -123.98,
+          "trades": 671,
+          "win_rate": 75.3,
+          "pf": 0.9,
+          "dd_pct": 109.4,
+          "avg": -1.848,
+          "final": -239.78,
+          "min_equity": -239.78,
+          "reasons": {
+            "sl": 565,
+            "partial_75": 15,
+            "hedge_roll": 23,
+            "hedge_covered": 26,
+            "hedge_reseed_partial": 11,
+            "hedge_reseed_close_older": 11,
+            "partial_50": 11,
+            "signal_decay": 5,
+            "health": 2,
+            "equity_stop": 2
+          }
+        },
+        "safe-aggressive": {
+          "net": -531.54,
+          "net_pct": -53.15,
+          "trades": 10865,
+          "win_rate": 73.8,
+          "pf": 0.99,
+          "dd_pct": 77.9,
+          "avg": -0.049,
+          "final": 468.46,
+          "min_equity": 348.09,
+          "reasons": {
+            "sl": 8769,
+            "hedge_roll": 417,
+            "hedge_covered": 621,
+            "hedge_reseed_partial": 357,
+            "hedge_reseed_close_older": 357,
+            "health": 329,
+            "partial_75": 6,
+            "basket_stop": 7,
+            "end_of_test": 2
+          }
+        },
+        "default": {
+          "net": -650.14,
+          "net_pct": -65.01,
+          "trades": 10266,
+          "win_rate": 70.2,
+          "pf": 0.98,
+          "dd_pct": 93.17,
+          "avg": -0.063,
+          "final": 349.86,
+          "min_equity": 129.31,
+          "reasons": {
+            "sl": 9027,
+            "hedge_roll": 221,
+            "hedge_covered": 424,
+            "health": 214,
+            "hedge_reseed_partial": 182,
+            "hedge_reseed_close_older": 182,
+            "partial_75": 7,
+            "partial_50": 1,
+            "basket_stop": 8
+          }
+        },
+        "balanced": {
+          "net": -180.46,
+          "net_pct": -18.05,
+          "trades": 6109,
+          "win_rate": 76.3,
+          "pf": 0.99,
+          "dd_pct": 71.76,
+          "avg": -0.03,
+          "final": 819.54,
+          "min_equity": 559.54,
+          "reasons": {
+            "sl": 5022,
+            "hedge_roll": 174,
+            "hedge_reseed_partial": 177,
+            "hedge_reseed_close_older": 177,
+            "health": 230,
+            "hedge_covered": 327,
+            "partial_75": 2
+          }
+        },
+        "safe": {
+          "net": 1774.25,
+          "net_pct": 177.43,
+          "trades": 2722,
+          "win_rate": 78.5,
+          "pf": 1.5,
+          "dd_pct": 4.78,
+          "avg": 0.652,
+          "final": 2774.25,
+          "min_equity": 998.73,
+          "reasons": {
+            "sl": 2027,
+            "tp": 363,
+            "health": 332
+          }
+        },
+        "TUNED": {
+          "net": 25834.87,
+          "net_pct": 2583.49,
+          "trades": 33906,
+          "win_rate": 80.0,
+          "pf": 1.6,
+          "dd_pct": 3.68,
+          "avg": 0.762,
+          "final": 26834.87,
+          "min_equity": 1001.42,
+          "reasons": {
+            "sl": 32233,
+            "tp": 268,
+            "health": 1405
+          }
+        }
+      },
+      "2026-06-17..2026-07-17": {
+        "aggressive": {
+          "net": -1239.78,
+          "net_pct": -123.98,
+          "trades": 671,
+          "win_rate": 75.3,
+          "pf": 0.9,
+          "dd_pct": 109.4,
+          "avg": -1.848,
+          "final": -239.78,
+          "min_equity": -239.78,
+          "reasons": {
+            "sl": 565,
+            "partial_75": 15,
+            "hedge_roll": 23,
+            "hedge_covered": 26,
+            "hedge_reseed_partial": 11,
+            "hedge_reseed_close_older": 11,
+            "partial_50": 11,
+            "signal_decay": 5,
+            "health": 2,
+            "equity_stop": 2
+          }
+        },
+        "safe-aggressive": {
+          "net": -531.54,
+          "net_pct": -53.15,
+          "trades": 10865,
+          "win_rate": 73.8,
+          "pf": 0.99,
+          "dd_pct": 77.9,
+          "avg": -0.049,
+          "final": 468.46,
+          "min_equity": 348.09,
+          "reasons": {
+            "sl": 8769,
+            "hedge_roll": 417,
+            "hedge_covered": 621,
+            "hedge_reseed_partial": 357,
+            "hedge_reseed_close_older": 357,
+            "health": 329,
+            "partial_75": 6,
+            "basket_stop": 7,
+            "end_of_test": 2
+          }
+        },
+        "default": {
+          "net": -650.14,
+          "net_pct": -65.01,
+          "trades": 10266,
+          "win_rate": 70.2,
+          "pf": 0.98,
+          "dd_pct": 93.17,
+          "avg": -0.063,
+          "final": 349.86,
+          "min_equity": 129.31,
+          "reasons": {
+            "sl": 9027,
+            "hedge_roll": 221,
+            "hedge_covered": 424,
+            "health": 214,
+            "hedge_reseed_partial": 182,
+            "hedge_reseed_close_older": 182,
+            "partial_75": 7,
+            "partial_50": 1,
+            "basket_stop": 8
+          }
+        },
+        "balanced": {
+          "net": -180.46,
+          "net_pct": -18.05,
+          "trades": 6109,
+          "win_rate": 76.3,
+          "pf": 0.99,
+          "dd_pct": 71.76,
+          "avg": -0.03,
+          "final": 819.54,
+          "min_equity": 559.54,
+          "reasons": {
+            "sl": 5022,
+            "hedge_roll": 174,
+            "hedge_reseed_partial": 177,
+            "hedge_reseed_close_older": 177,
+            "health": 230,
+            "hedge_covered": 327,
+            "partial_75": 2
+          }
+        },
+        "safe": {
+          "net": 1774.25,
+          "net_pct": 177.43,
+          "trades": 2722,
+          "win_rate": 78.5,
+          "pf": 1.5,
+          "dd_pct": 4.78,
+          "avg": 0.652,
+          "final": 2774.25,
+          "min_equity": 998.73,
+          "reasons": {
+            "sl": 2027,
+            "tp": 363,
+            "health": 332
+          }
+        },
+        "TUNED": {
+          "net": 25834.87,
+          "net_pct": 2583.49,
+          "trades": 33906,
+          "win_rate": 80.0,
+          "pf": 1.6,
+          "dd_pct": 3.68,
+          "avg": 0.762,
+          "final": 26834.87,
+          "min_equity": 1001.42,
+          "reasons": {
+            "sl": 32233,
+            "tp": 268,
+            "health": 1405
+          }
+        }
+      },
+      "2026-07-17..2026-08-17": {
+        "aggressive": {
+          "net": -1239.78,
+          "net_pct": -123.98,
+          "trades": 671,
+          "win_rate": 75.3,
+          "pf": 0.9,
+          "dd_pct": 109.4,
+          "avg": -1.848,
+          "final": -239.78,
+          "min_equity": -239.78,
+          "reasons": {
+            "sl": 565,
+            "partial_75": 15,
+            "hedge_roll": 23,
+            "hedge_covered": 26,
+            "hedge_reseed_partial": 11,
+            "hedge_reseed_close_older": 11,
+            "partial_50": 11,
+            "signal_decay": 5,
+            "health": 2,
+            "equity_stop": 2
+          }
+        },
+        "safe-aggressive": {
+          "net": -531.54,
+          "net_pct": -53.15,
+          "trades": 10865,
+          "win_rate": 73.8,
+          "pf": 0.99,
+          "dd_pct": 77.9,
+          "avg": -0.049,
+          "final": 468.46,
+          "min_equity": 348.09,
+          "reasons": {
+            "sl": 8769,
+            "hedge_roll": 417,
+            "hedge_covered": 621,
+            "hedge_reseed_partial": 357,
+            "hedge_reseed_close_older": 357,
+            "health": 329,
+            "partial_75": 6,
+            "basket_stop": 7,
+            "end_of_test": 2
+          }
+        },
+        "default": {
+          "net": -650.14,
+          "net_pct": -65.01,
+          "trades": 10266,
+          "win_rate": 70.2,
+          "pf": 0.98,
+          "dd_pct": 93.17,
+          "avg": -0.063,
+          "final": 349.86,
+          "min_equity": 129.31,
+          "reasons": {
+            "sl": 9027,
+            "hedge_roll": 221,
+            "hedge_covered": 424,
+            "health": 214,
+            "hedge_reseed_partial": 182,
+            "hedge_reseed_close_older": 182,
+            "partial_75": 7,
+            "partial_50": 1,
+            "basket_stop": 8
+          }
+        },
+        "balanced": {
+          "net": -180.46,
+          "net_pct": -18.05,
+          "trades": 6109,
+          "win_rate": 76.3,
+          "pf": 0.99,
+          "dd_pct": 71.76,
+          "avg": -0.03,
+          "final": 819.54,
+          "min_equity": 559.54,
+          "reasons": {
+            "sl": 5022,
+            "hedge_roll": 174,
+            "hedge_reseed_partial": 177,
+            "hedge_reseed_close_older": 177,
+            "health": 230,
+            "hedge_covered": 327,
+            "partial_75": 2
+          }
+        },
+        "safe": {
+          "net": 1774.25,
+          "net_pct": 177.43,
+          "trades": 2722,
+          "win_rate": 78.5,
+          "pf": 1.5,
+          "dd_pct": 4.78,
+          "avg": 0.652,
+          "final": 2774.25,
+          "min_equity": 998.73,
+          "reasons": {
+            "sl": 2027,
+            "tp": 363,
+            "health": 332
+          }
+        },
+        "TUNED": {
+          "net": 25834.87,
+          "net_pct": 2583.49,
+          "trades": 33906,
+          "win_rate": 80.0,
+          "pf": 1.6,
+          "dd_pct": 3.68,
+          "avg": 0.762,
+          "final": 26834.87,
+          "min_equity": 1001.42,
+          "reasons": {
+            "sl": 32233,
+            "tp": 268,
+            "health": 1405
+          }
+        }
+      }
+    },
+    "M5-vudo": {
+      "2026-05-18..2026-06-17": {
+        "aggressive": {
+          "net": -1026.33,
+          "net_pct": -102.63,
+          "trades": 306,
+          "win_rate": 84.0,
+          "pf": 0.82,
+          "dd_pct": 101.04,
+          "avg": -3.354,
+          "final": -26.33,
+          "min_equity": -26.33,
+          "reasons": {
+            "sl": 257,
+            "partial_75": 6,
+            "partial_50": 3,
+            "hedge_roll": 12,
+            "hedge_covered": 9,
+            "signal_decay": 1,
+            "hedge_reseed_partial": 6,
+            "hedge_reseed_close_older": 6,
+            "equity_stop": 6
+          }
+        },
+        "safe-aggressive": {
+          "net": 4466.72,
+          "net_pct": 446.67,
+          "trades": 4842,
+          "win_rate": 87.5,
+          "pf": 1.23,
+          "dd_pct": 17.82,
+          "avg": 0.922,
+          "final": 5466.72,
+          "min_equity": 1005.68,
+          "reasons": {
+            "sl": 4083,
+            "health": 134,
+            "hedge_covered": 232,
+            "hedge_roll": 143,
+            "hedge_reseed_partial": 124,
+            "hedge_reseed_close_older": 124,
+            "end_of_test": 2
+          }
+        },
+        "default": {
+          "net": 1618.68,
+          "net_pct": 161.87,
+          "trades": 3599,
+          "win_rate": 87.7,
+          "pf": 1.07,
+          "dd_pct": 62.77,
+          "avg": 0.45,
+          "final": 2618.68,
+          "min_equity": 642.55,
+          "reasons": {
+            "sl": 3068,
+            "health": 79,
+            "hedge_roll": 96,
+            "hedge_reseed_partial": 78,
+            "hedge_reseed_close_older": 78,
+            "hedge_covered": 198,
+            "partial_75": 1,
+            "basket_stop": 1
+          }
+        },
+        "balanced": {
+          "net": 3861.55,
+          "net_pct": 386.16,
+          "trades": 3355,
+          "win_rate": 87.4,
+          "pf": 1.27,
+          "dd_pct": 22.06,
+          "avg": 1.151,
+          "final": 4861.55,
+          "min_equity": 1006.2,
+          "reasons": {
+            "sl": 2888,
+            "health": 109,
+            "hedge_roll": 68,
+            "hedge_reseed_partial": 70,
+            "hedge_reseed_close_older": 70,
+            "hedge_covered": 148,
+            "end_of_test": 2
+          }
+        },
+        "safe": {
+          "net": 6500.52,
+          "net_pct": 650.05,
+          "trades": 3892,
+          "win_rate": 90.1,
+          "pf": 3.32,
+          "dd_pct": 1.66,
+          "avg": 1.67,
+          "final": 7500.52,
+          "min_equity": 995.0,
+          "reasons": {
+            "sl": 2871,
+            "tp": 752,
+            "health": 269
+          }
+        },
+        "TUNED": {
+          "net": 23169.26,
+          "net_pct": 2316.93,
+          "trades": 12704,
+          "win_rate": 90.8,
+          "pf": 3.48,
+          "dd_pct": 3.98,
+          "avg": 1.824,
+          "final": 24169.26,
+          "min_equity": 1006.35,
+          "reasons": {
+            "sl": 12425,
+            "tp": 59,
+            "health": 220
+          }
+        }
+      },
+      "2026-06-17..2026-07-17": {
+        "aggressive": {
+          "net": -988.4,
+          "net_pct": -98.84,
+          "trades": 199,
+          "win_rate": 84.9,
+          "pf": 0.63,
+          "dd_pct": 99.32,
+          "avg": -4.967,
+          "final": 11.6,
+          "min_equity": 11.6,
+          "reasons": {
+            "sl": 177,
+            "partial_75": 4,
+            "partial_50": 4,
+            "hedge_covered": 6,
+            "hedge_roll": 2,
+            "signal_decay": 2,
+            "hedge_reseed_partial": 1,
+            "hedge_reseed_close_older": 1,
+            "equity_stop": 2
+          }
+        },
+        "safe-aggressive": {
+          "net": 3466.01,
+          "net_pct": 346.6,
+          "trades": 3327,
+          "win_rate": 88.4,
+          "pf": 1.26,
+          "dd_pct": 14.99,
+          "avg": 1.042,
+          "final": 4466.01,
+          "min_equity": 958.97,
+          "reasons": {
+            "sl": 2823,
+            "hedge_roll": 92,
+            "hedge_reseed_partial": 76,
+            "hedge_reseed_close_older": 76,
+            "hedge_covered": 169,
+            "health": 89,
+            "end_of_test": 2
+          }
+        },
+        "default": {
+          "net": 781.43,
+          "net_pct": 78.14,
+          "trades": 2200,
+          "win_rate": 87.5,
+          "pf": 1.06,
+          "dd_pct": 75.4,
+          "avg": 0.355,
+          "final": 1781.43,
+          "min_equity": 591.11,
+          "reasons": {
+            "sl": 1903,
+            "hedge_covered": 115,
+            "health": 43,
+            "hedge_roll": 50,
+            "hedge_reseed_partial": 42,
+            "hedge_reseed_close_older": 42,
+            "basket_stop": 5
+          }
+        },
+        "balanced": {
+          "net": 2509.9,
+          "net_pct": 250.99,
+          "trades": 2183,
+          "win_rate": 88.0,
+          "pf": 1.28,
+          "dd_pct": 31.02,
+          "avg": 1.15,
+          "final": 3509.9,
+          "min_equity": 924.47,
+          "reasons": {
+            "sl": 1894,
+            "hedge_roll": 43,
+            "hedge_reseed_partial": 43,
+            "hedge_reseed_close_older": 43,
+            "hedge_covered": 91,
+            "health": 67,
+            "end_of_test": 2
+          }
+        },
+        "safe": {
+          "net": 4402.57,
+          "net_pct": 440.26,
+          "trades": 2707,
+          "win_rate": 89.7,
+          "pf": 3.3,
+          "dd_pct": 1.52,
+          "avg": 1.626,
+          "final": 5402.57,
+          "min_equity": 992.15,
+          "reasons": {
+            "sl": 2023,
+            "tp": 496,
+            "health": 188
+          }
+        },
+        "TUNED": {
+          "net": 15024.4,
+          "net_pct": 1502.44,
+          "trades": 8682,
+          "win_rate": 90.9,
+          "pf": 3.47,
+          "dd_pct": 3.29,
+          "avg": 1.731,
+          "final": 16024.4,
+          "min_equity": 993.03,
+          "reasons": {
+            "sl": 8483,
+            "health": 157,
+            "tp": 42
+          }
+        }
+      },
+      "2026-07-17..2026-08-17": {
+        "aggressive": {
+          "net": -1101.68,
+          "net_pct": -110.17,
+          "trades": 207,
+          "win_rate": 83.1,
+          "pf": 0.66,
+          "dd_pct": 106.14,
+          "avg": -5.322,
+          "final": -101.68,
+          "min_equity": -101.68,
+          "reasons": {
+            "sl": 172,
+            "partial_75": 5,
+            "partial_50": 2,
+            "signal_decay": 1,
+            "hedge_roll": 6,
+            "hedge_reseed_partial": 5,
+            "hedge_reseed_close_older": 5,
+            "hedge_covered": 7,
+            "equity_stop": 4
+          }
+        },
+        "safe-aggressive": {
+          "net": 1796.83,
+          "net_pct": 179.68,
+          "trades": 1938,
+          "win_rate": 88.0,
+          "pf": 1.27,
+          "dd_pct": 21.89,
+          "avg": 0.927,
+          "final": 2796.83,
+          "min_equity": 895.97,
+          "reasons": {
+            "sl": 1668,
+            "hedge_roll": 53,
+            "hedge_reseed_partial": 47,
+            "hedge_reseed_close_older": 47,
+            "health": 47,
+            "hedge_covered": 76
+          }
+        },
+        "default": {
+          "net": 111.38,
+          "net_pct": 11.14,
+          "trades": 1108,
+          "win_rate": 86.2,
+          "pf": 1.02,
+          "dd_pct": 71.12,
+          "avg": 0.101,
+          "final": 1111.38,
+          "min_equity": 353.67,
+          "reasons": {
+            "sl": 994,
+            "hedge_roll": 21,
+            "health": 13,
+            "hedge_covered": 43,
+            "hedge_reseed_partial": 16,
+            "hedge_reseed_close_older": 16,
+            "basket_stop": 5
+          }
+        },
+        "balanced": {
+          "net": 470.21,
+          "net_pct": 47.02,
+          "trades": 874,
+          "win_rate": 86.0,
+          "pf": 1.17,
+          "dd_pct": 36.8,
+          "avg": 0.538,
+          "final": 1470.21,
+          "min_equity": 689.64,
+          "reasons": {
+            "sl": 795,
+            "hedge_roll": 12,
+            "health": 23,
+            "hedge_covered": 16,
+            "hedge_reseed_partial": 12,
+            "hedge_reseed_close_older": 12,
+            "basket_stop": 4
+          }
+        },
+        "safe": {
+          "net": 2447.35,
+          "net_pct": 244.73,
+          "trades": 1531,
+          "win_rate": 89.7,
+          "pf": 3.43,
+          "dd_pct": 1.78,
+          "avg": 1.599,
+          "final": 3447.35,
+          "min_equity": 1000.76,
+          "reasons": {
+            "sl": 1195,
+            "tp": 251,
+            "health": 85
+          }
+        },
+        "TUNED": {
+          "net": 7394.75,
+          "net_pct": 739.47,
+          "trades": 4673,
+          "win_rate": 90.3,
+          "pf": 3.24,
+          "dd_pct": 2.05,
+          "avg": 1.582,
+          "final": 8394.75,
+          "min_equity": 1000.71,
+          "reasons": {
+            "sl": 4567,
+            "health": 85,
+            "tp": 21
+          }
+        }
+      }
+    }
+  },
+  "overall": {
+    "M1-primary": {
+      "aggressive": {
+        "net": -1039.71,
+        "net_pct": -103.97,
+        "trades": 133,
+        "win_rate": 69.2,
+        "pf": 0.48,
+        "dd_pct": 103.01,
+        "avg": -7.817,
+        "final": -39.71,
+        "min_equity": -39.71,
+        "reasons": {
+          "sl": 108,
+          "partial_75": 2,
+          "partial_50": 1,
+          "signal_decay": 1,
+          "hedge_covered": 5,
+          "hedge_roll": 4,
+          "hedge_reseed_partial": 4,
+          "hedge_reseed_close_older": 4,
+          "equity_stop": 4
+        },
+        "diag": {
+          "signals_buy": 63,
+          "signals_sell": 57,
+          "orders_opened": 126,
+          "blocked_score": 217,
+          "blocked_dampen": 10,
+          "blocked_duplicate": 3,
+          "exits_sl": 108,
+          "exits_decay": 1,
+          "hedge_starts": 7,
+          "hedge_rolls": 4,
+          "hedge_covers": 5,
+          "hedge_reseeds": 4,
+          "spread_cost_paid": 287.7497599999998,
+          "equity_pauses": 9,
+          "partial_closes": 7,
+          "max_lot_used": 0.3
+        }
+      },
+      "safe-aggressive": {
+        "net": -474.31,
+        "net_pct": -47.43,
+        "trades": 8186,
+        "win_rate": 66.2,
+        "pf": 0.97,
+        "dd_pct": 77.18,
+        "avg": -0.058,
+        "final": 525.69,
+        "min_equity": 248.06,
+        "reasons": {
+          "hedge_roll": 151,
+          "sl": 7382,
+          "hedge_covered": 233,
+          "health": 159,
+          "hedge_reseed_partial": 130,
+          "hedge_reseed_close_older": 130,
+          "basket_stop": 1
+        },
+        "diag": {
+          "signals_buy": 6938,
+          "signals_sell": 7111,
+          "orders_opened": 8056,
+          "blocked_spread": 6556,
+          "blocked_score": 157775,
+          "blocked_dampen": 1207,
+          "blocked_max_loss_pos": 27,
+          "blocked_duplicate": 3811,
+          "blocked_cooldown": 1162,
+          "blocked_percandle": 28,
+          "blocked_opposite_on_bar": 28,
+          "exits_sl": 7382,
+          "exits_health": 159,
+          "reentries": 5,
+          "hedge_starts": 308,
+          "hedge_rolls": 151,
+          "hedge_covers": 233,
+          "hedge_reseeds": 130,
+          "hedge_releases": 75,
+          "spread_cost_paid": 4688.722730000057,
+          "equity_pauses": 6,
+          "basket_pauses": 1,
+          "partial_closes": 130,
+          "max_lot_used": 0.04
+        }
+      },
+      "default": {
+        "net": -696.04,
+        "net_pct": -69.6,
+        "trades": 6579,
+        "win_rate": 62.2,
+        "pf": 0.95,
+        "dd_pct": 86.51,
+        "avg": -0.106,
+        "final": 303.96,
+        "min_equity": 159.42,
+        "reasons": {
+          "sl": 6206,
+          "hedge_covered": 104,
+          "health": 78,
+          "hedge_roll": 64,
+          "hedge_reseed_partial": 61,
+          "hedge_reseed_close_older": 61,
+          "basket_stop": 4,
+          "partial_75": 1
+        },
+        "diag": {
+          "signals_buy": 7412,
+          "signals_sell": 7849,
+          "orders_opened": 6517,
+          "blocked_spread": 8981,
+          "blocked_score": 156256,
+          "blocked_dampen": 187,
+          "blocked_max_loss_pos": 5,
+          "blocked_duplicate": 3382,
+          "blocked_cooldown": 1462,
+          "blocked_percandle": 30,
+          "blocked_opposite_on_bar": 30,
+          "exits_sl": 6206,
+          "exits_health": 78,
+          "reentries": 3,
+          "hedge_starts": 117,
+          "hedge_rolls": 64,
+          "hedge_covers": 104,
+          "hedge_reseeds": 61,
+          "hedge_releases": 13,
+          "spread_cost_paid": 3902.839420000132,
+          "equity_pauses": 40,
+          "basket_pauses": 2,
+          "partial_closes": 62,
+          "max_lot_used": 0.1
+        }
+      },
+      "balanced": {
+        "net": -232.78,
+        "net_pct": -23.28,
+        "trades": 3498,
+        "win_rate": 73.8,
+        "pf": 0.98,
+        "dd_pct": 54.75,
+        "avg": -0.067,
+        "final": 767.22,
+        "min_equity": 486.68,
+        "reasons": {
+          "sl": 2941,
+          "hedge_covered": 169,
+          "health": 121,
+          "hedge_roll": 98,
+          "hedge_reseed_partial": 84,
+          "hedge_reseed_close_older": 84,
+          "partial_75": 1
+        },
+        "diag": {
+          "signals_buy": 4396,
+          "signals_sell": 4459,
+          "orders_opened": 3413,
+          "blocked_spread": 5807,
+          "blocked_score": 165676,
+          "blocked_dampen": 477,
+          "blocked_max_loss_pos": 9,
+          "blocked_duplicate": 2778,
+          "blocked_cooldown": 206,
+          "blocked_percandle": 42,
+          "blocked_opposite_on_bar": 42,
+          "exits_sl": 2941,
+          "exits_health": 121,
+          "reentries": 2,
+          "hedge_starts": 191,
+          "hedge_rolls": 98,
+          "hedge_covers": 169,
+          "hedge_reseeds": 84,
+          "hedge_releases": 22,
+          "spread_cost_paid": 2230.320559999975,
+          "equity_pauses": 5,
+          "partial_closes": 85,
+          "max_lot_used": 0.06
+        }
+      },
+      "safe": {
+        "net": 474.41,
+        "net_pct": 47.44,
+        "trades": 1202,
+        "win_rate": 76.4,
+        "pf": 1.33,
+        "dd_pct": 4.35,
+        "avg": 0.395,
+        "final": 1474.41,
+        "min_equity": 997.7,
+        "reasons": {
+          "sl": 1013,
+          "tp": 84,
+          "health": 105
+        },
+        "diag": {
+          "signals_buy": 2154,
+          "signals_sell": 2185,
+          "orders_opened": 1202,
+          "blocked_spread": 3126,
+          "blocked_score": 172147,
+          "blocked_dampen": 1248,
+          "blocked_max_loss_pos": 5,
+          "blocked_duplicate": 86,
+          "blocked_cooldown": 264,
+          "exits_sl": 1013,
+          "exits_health": 105,
+          "spread_cost_paid": 542.43228,
+          "equity_pauses": 2,
+          "max_lot_used": 0.01
+        }
+      },
+      "TUNED": {
+        "net": 8747.17,
+        "net_pct": 874.72,
+        "trades": 22107,
+        "win_rate": 78.9,
+        "pf": 1.35,
+        "dd_pct": 6.04,
+        "avg": 0.396,
+        "final": 9747.17,
+        "min_equity": 999.95,
+        "reasons": {
+          "sl": 21221,
+          "tp": 120,
+          "health": 766
+        },
+        "diag": {
+          "signals_buy": 41358,
+          "signals_sell": 42639,
+          "orders_opened": 22107,
+          "blocked_spread": 42829,
+          "blocked_score": 79157,
+          "blocked_dampen": 4197,
+          "blocked_max_loss_pos": 2153,
+          "blocked_duplicate": 9921,
+          "blocked_cooldown": 720,
+          "blocked_percandle": 64,
+          "blocked_opposite_on_bar": 64,
+          "exits_sl": 21221,
+          "exits_health": 766,
+          "reentries": 110,
+          "spread_cost_paid": 9888.938949999598,
+          "max_lot_used": 0.02
+        }
+      }
+    },
+    "M1-FTMO": {
+      "aggressive": {
+        "net": -1010.41,
+        "net_pct": -101.04,
+        "trades": 527,
+        "win_rate": 68.1,
+        "pf": 0.9,
+        "dd_pct": 100.57,
+        "avg": -1.917,
+        "final": -10.41,
+        "min_equity": -10.41,
+        "reasons": {
+          "sl": 339,
+          "partial_75": 24,
+          "partial_50": 10,
+          "hedge_roll": 47,
+          "hedge_covered": 62,
+          "signal_decay": 7,
+          "hedge_reseed_partial": 17,
+          "hedge_reseed_close_older": 17,
+          "equity_stop": 4
+        },
+        "diag": {
+          "signals_buy": 223,
+          "signals_sell": 273,
+          "orders_opened": 476,
+          "blocked_spread": 120,
+          "blocked_score": 1629,
+          "blocked_dampen": 109,
+          "blocked_max_loss_pos": 2,
+          "blocked_duplicate": 1540,
+          "blocked_opposite_on_bar": 2,
+          "exits_sl": 339,
+          "exits_decay": 7,
+          "hedge_starts": 64,
+          "hedge_rolls": 47,
+          "hedge_covers": 62,
+          "hedge_reseeds": 17,
+          "spread_cost_paid": 1360.465749999998,
+          "equity_pauses": 12,
+          "partial_closes": 51,
+          "max_lot_used": 0.3
+        }
+      },
+      "safe-aggressive": {
+        "net": -523.89,
+        "net_pct": -52.39,
+        "trades": 9958,
+        "win_rate": 73.9,
+        "pf": 0.99,
+        "dd_pct": 82.95,
+        "avg": -0.053,
+        "final": 476.11,
+        "min_equity": 391.2,
+        "reasons": {
+          "hedge_roll": 374,
+          "sl": 8069,
+          "hedge_reseed_partial": 320,
+          "hedge_reseed_close_older": 320,
+          "health": 303,
+          "hedge_covered": 557,
+          "partial_75": 7,
+          "basket_stop": 6,
+          "end_of_test": 2
+        },
+        "diag": {
+          "signals_buy": 5318,
+          "signals_sell": 6086,
+          "orders_opened": 9631,
+          "blocked_spread": 3146,
+          "blocked_score": 126044,
+          "blocked_dampen": 1930,
+          "blocked_max_loss_pos": 64,
+          "blocked_duplicate": 34438,
+          "blocked_cooldown": 346,
+          "blocked_percandle": 71,
+          "blocked_opposite_on_bar": 71,
+          "exits_sl": 8069,
+          "exits_health": 303,
+          "reentries": 5,
+          "hedge_starts": 753,
+          "hedge_rolls": 374,
+          "hedge_covers": 557,
+          "hedge_reseeds": 320,
+          "hedge_releases": 195,
+          "spread_cost_paid": 6326.0507199999365,
+          "equity_pauses": 11,
+          "basket_pauses": 4,
+          "partial_closes": 327,
+          "max_lot_used": 0.04
+        }
+      },
+      "default": {
+        "net": -650.13,
+        "net_pct": -65.01,
+        "trades": 9169,
+        "win_rate": 69.1,
+        "pf": 0.98,
+        "dd_pct": 91.1,
+        "avg": -0.071,
+        "final": 349.87,
+        "min_equity": 129.49,
+        "reasons": {
+          "hedge_roll": 161,
+          "sl": 8247,
+          "hedge_covered": 288,
+          "health": 169,
+          "hedge_reseed_partial": 148,
+          "hedge_reseed_close_older": 148,
+          "basket_stop": 6,
+          "partial_75": 2
+        },
+        "diag": {
+          "signals_buy": 6344,
+          "signals_sell": 7229,
+          "orders_opened": 9019,
+          "blocked_spread": 5173,
+          "blocked_score": 137986,
+          "blocked_dampen": 32,
+          "blocked_max_loss_pos": 8,
+          "blocked_duplicate": 20619,
+          "blocked_cooldown": 1014,
+          "blocked_percandle": 62,
+          "blocked_opposite_on_bar": 62,
+          "exits_sl": 8247,
+          "exits_health": 169,
+          "reentries": 4,
+          "hedge_starts": 319,
+          "hedge_rolls": 161,
+          "hedge_covers": 288,
+          "hedge_reseeds": 148,
+          "hedge_releases": 31,
+          "spread_cost_paid": 5976.13614999993,
+          "equity_pauses": 65,
+          "basket_pauses": 4,
+          "partial_closes": 150,
+          "max_lot_used": 0.1
+        }
+      },
+      "balanced": {
+        "net": -203.13,
+        "net_pct": -20.31,
+        "trades": 5357,
+        "win_rate": 76.0,
+        "pf": 0.99,
+        "dd_pct": 73.71,
+        "avg": -0.038,
+        "final": 796.87,
+        "min_equity": 503.58,
+        "reasons": {
+          "hedge_roll": 127,
+          "sl": 4521,
+          "hedge_covered": 235,
+          "health": 186,
+          "hedge_reseed_partial": 143,
+          "hedge_reseed_close_older": 143,
+          "partial_75": 2
+        },
+        "diag": {
+          "signals_buy": 3752,
+          "signals_sell": 4589,
+          "orders_opened": 5212,
+          "blocked_spread": 3671,
+          "blocked_score": 145054,
+          "blocked_dampen": 404,
+          "blocked_max_loss_pos": 4,
+          "blocked_duplicate": 20273,
+          "blocked_cooldown": 152,
+          "blocked_percandle": 72,
+          "blocked_opposite_on_bar": 72,
+          "exits_sl": 4521,
+          "exits_health": 186,
+          "reentries": 5,
+          "hedge_starts": 272,
+          "hedge_rolls": 127,
+          "hedge_covers": 235,
+          "hedge_reseeds": 143,
+          "hedge_releases": 37,
+          "spread_cost_paid": 3307.4965700000625,
+          "equity_pauses": 9,
+          "partial_closes": 145,
+          "max_lot_used": 0.06
+        }
+      },
+      "safe": {
+        "net": 1313.78,
+        "net_pct": 131.38,
+        "trades": 2170,
+        "win_rate": 77.3,
+        "pf": 1.5,
+        "dd_pct": 5.07,
+        "avg": 0.605,
+        "final": 2313.78,
+        "min_equity": 996.37,
+        "reasons": {
+          "sl": 1677,
+          "tp": 248,
+          "health": 245
+        },
+        "diag": {
+          "signals_buy": 3937,
+          "signals_sell": 4078,
+          "orders_opened": 2170,
+          "blocked_spread": 5815,
+          "blocked_score": 163693,
+          "blocked_dampen": 2212,
+          "blocked_max_loss_pos": 10,
+          "blocked_duplicate": 248,
+          "blocked_cooldown": 236,
+          "exits_sl": 1677,
+          "exits_health": 245,
+          "spread_cost_paid": 952.7880900000077,
+          "equity_pauses": 2,
+          "max_lot_used": 0.01
+        }
+      },
+      "TUNED": {
+        "net": 22618.47,
+        "net_pct": 2261.85,
+        "trades": 30227,
+        "win_rate": 80.0,
+        "pf": 1.59,
+        "dd_pct": 2.92,
+        "avg": 0.748,
+        "final": 23618.47,
+        "min_equity": 983.34,
+        "reasons": {
+          "sl": 28728,
+          "tp": 231,
+          "health": 1268
+        },
+        "diag": {
+          "signals_buy": 34548,
+          "signals_sell": 33320,
+          "orders_opened": 30227,
+          "blocked_spread": 24992,
+          "blocked_score": 59222,
+          "blocked_dampen": 47,
+          "blocked_max_loss_pos": 23,
+          "blocked_duplicate": 46775,
+          "blocked_cooldown": 192,
+          "blocked_percandle": 168,
+          "blocked_opposite_on_bar": 168,
+          "exits_sl": 28728,
+          "exits_health": 1268,
+          "reentries": 246,
+          "spread_cost_paid": 13388.25609999989,
+          "max_lot_used": 0.01
+        }
+      }
+    },
+    "M5-vudo": {
+      "aggressive": {
+        "net": -1026.33,
+        "net_pct": -102.63,
+        "trades": 306,
+        "win_rate": 84.0,
+        "pf": 0.82,
+        "dd_pct": 101.04,
+        "avg": -3.354,
+        "final": -26.33,
+        "min_equity": -26.33,
+        "reasons": {
+          "sl": 257,
+          "partial_75": 6,
+          "partial_50": 3,
+          "hedge_roll": 12,
+          "hedge_covered": 9,
+          "signal_decay": 1,
+          "hedge_reseed_partial": 6,
+          "hedge_reseed_close_older": 6,
+          "equity_stop": 6
+        },
+        "diag": {
+          "signals_buy": 143,
+          "signals_sell": 143,
+          "orders_opened": 291,
+          "blocked_score": 461,
+          "blocked_dampen": 79,
+          "blocked_max_loss_pos": 9,
+          "blocked_duplicate": 10,
+          "exits_sl": 257,
+          "exits_decay": 1,
+          "hedge_starts": 12,
+          "hedge_rolls": 12,
+          "hedge_covers": 9,
+          "hedge_reseeds": 6,
+          "spread_cost_paid": 342.00000000000057,
+          "equity_pauses": 12,
+          "partial_closes": 15,
+          "max_lot_used": 0.3
+        }
+      },
+      "safe-aggressive": {
+        "net": 4466.72,
+        "net_pct": 446.67,
+        "trades": 4842,
+        "win_rate": 87.5,
+        "pf": 1.23,
+        "dd_pct": 17.82,
+        "avg": 0.922,
+        "final": 5466.72,
+        "min_equity": 1005.68,
+        "reasons": {
+          "sl": 4083,
+          "health": 134,
+          "hedge_covered": 232,
+          "hedge_roll": 143,
+          "hedge_reseed_partial": 124,
+          "hedge_reseed_close_older": 124,
+          "end_of_test": 2
+        },
+        "diag": {
+          "signals_buy": 2363,
+          "signals_sell": 2598,
+          "orders_opened": 4718,
+          "blocked_score": 30863,
+          "blocked_dampen": 1810,
+          "blocked_max_loss_pos": 724,
+          "blocked_duplicate": 574,
+          "blocked_cooldown": 4,
+          "blocked_percandle": 18,
+          "blocked_opposite_on_bar": 18,
+          "exits_sl": 4083,
+          "exits_health": 134,
+          "reentries": 11,
+          "hedge_starts": 305,
+          "hedge_rolls": 143,
+          "hedge_covers": 232,
+          "hedge_reseeds": 124,
+          "hedge_releases": 72,
+          "spread_cost_paid": 1585.483999999993,
+          "partial_closes": 124,
+          "max_lot_used": 0.04
+        }
+      },
+      "default": {
+        "net": 1618.68,
+        "net_pct": 161.87,
+        "trades": 3599,
+        "win_rate": 87.7,
+        "pf": 1.07,
+        "dd_pct": 62.77,
+        "avg": 0.45,
+        "final": 2618.68,
+        "min_equity": 642.55,
+        "reasons": {
+          "sl": 3068,
+          "health": 79,
+          "hedge_roll": 96,
+          "hedge_reseed_partial": 78,
+          "hedge_reseed_close_older": 78,
+          "hedge_covered": 198,
+          "partial_75": 1,
+          "basket_stop": 1
+        },
+        "diag": {
+          "signals_buy": 1506,
+          "signals_sell": 1725,
+          "orders_opened": 3520,
+          "blocked_score": 33838,
+          "blocked_dampen": 383,
+          "blocked_max_loss_pos": 78,
+          "blocked_duplicate": 690,
+          "blocked_percandle": 23,
+          "blocked_opposite_on_bar": 23,
+          "exits_sl": 3068,
+          "exits_health": 79,
+          "reentries": 2,
+          "hedge_starts": 215,
+          "hedge_rolls": 96,
+          "hedge_covers": 198,
+          "hedge_reseeds": 78,
+          "hedge_releases": 17,
+          "spread_cost_paid": 1456.5079999999978,
+          "equity_pauses": 11,
+          "basket_pauses": 1,
+          "partial_closes": 79,
+          "max_lot_used": 0.1
+        }
+      },
+      "balanced": {
+        "net": 3861.55,
+        "net_pct": 386.16,
+        "trades": 3355,
+        "win_rate": 87.4,
+        "pf": 1.27,
+        "dd_pct": 22.06,
+        "avg": 1.151,
+        "final": 4861.55,
+        "min_equity": 1006.2,
+        "reasons": {
+          "sl": 2888,
+          "health": 109,
+          "hedge_roll": 68,
+          "hedge_reseed_partial": 70,
+          "hedge_reseed_close_older": 70,
+          "hedge_covered": 148,
+          "end_of_test": 2
+        },
+        "diag": {
+          "signals_buy": 1409,
+          "signals_sell": 1666,
+          "orders_opened": 3285,
+          "blocked_score": 34092,
+          "blocked_dampen": 430,
+          "blocked_max_loss_pos": 85,
+          "blocked_duplicate": 583,
+          "blocked_cooldown": 8,
+          "blocked_percandle": 30,
+          "blocked_opposite_on_bar": 30,
+          "exits_sl": 2888,
+          "exits_health": 109,
+          "reentries": 6,
+          "hedge_starts": 165,
+          "hedge_rolls": 68,
+          "hedge_covers": 148,
+          "hedge_reseeds": 70,
+          "hedge_releases": 16,
+          "spread_cost_paid": 1123.0239999999976,
+          "partial_closes": 70,
+          "max_lot_used": 0.06
+        }
+      },
+      "safe": {
+        "net": 6500.52,
+        "net_pct": 650.05,
+        "trades": 3892,
+        "win_rate": 90.1,
+        "pf": 3.32,
+        "dd_pct": 1.66,
+        "avg": 1.67,
+        "final": 7500.52,
+        "min_equity": 995.0,
+        "reasons": {
+          "sl": 2871,
+          "tp": 752,
+          "health": 269
+        },
+        "diag": {
+          "signals_buy": 1870,
+          "signals_sell": 2045,
+          "orders_opened": 3892,
+          "blocked_score": 32587,
+          "blocked_dampen": 1638,
+          "blocked_max_loss_pos": 18,
+          "blocked_duplicate": 42,
+          "blocked_cooldown": 66,
+          "exits_sl": 2871,
+          "exits_health": 269,
+          "spread_cost_paid": 995.6880000000035,
+          "max_lot_used": 0.01
+        }
+      },
+      "TUNED": {
+        "net": 23169.26,
+        "net_pct": 2316.93,
+        "trades": 12704,
+        "win_rate": 90.8,
+        "pf": 3.48,
+        "dd_pct": 3.98,
+        "avg": 1.824,
+        "final": 24169.26,
+        "min_equity": 1006.35,
+        "reasons": {
+          "sl": 12425,
+          "tp": 59,
+          "health": 220
+        },
+        "diag": {
+          "signals_buy": 7923,
+          "signals_sell": 8160,
+          "orders_opened": 12704,
+          "blocked_score": 20746,
+          "blocked_dampen": 462,
+          "blocked_max_loss_pos": 407,
+          "blocked_duplicate": 899,
+          "blocked_cooldown": 30,
+          "blocked_percandle": 14,
+          "blocked_opposite_on_bar": 14,
+          "exits_sl": 12425,
+          "exits_health": 220,
+          "reentries": 21,
+          "spread_cost_paid": 3250.6479999996714,
+          "max_lot_used": 0.01
+        }
+      }
+    }
+  },
+  "cost_sensitivity": {
+    "default(shipped)": {
+      "spread_x0.5_slip0.0": {
+        "net": -540.8,
+        "dd": 87.45,
+        "trades": 12365,
+        "pf": 0.98
+      },
+      "spread_x0.5_slip0.05": {
+        "net": -579.03,
+        "dd": 92.91,
+        "trades": 12366,
+        "pf": 0.98
+      },
+      "spread_x0.5_slip0.1": {
+        "net": -688.9,
+        "dd": 92.7,
+        "trades": 12352,
+        "pf": 0.97
+      },
+      "spread_x1.0_slip0.0": {
+        "net": -696.04,
+        "dd": 86.51,
+        "trades": 6579,
+        "pf": 0.95
+      },
+      "spread_x1.0_slip0.05": {
+        "net": -729.22,
+        "dd": 89.99,
+        "trades": 6534,
+        "pf": 0.94
+      },
+      "spread_x1.0_slip0.1": {
+        "net": -980.13,
+        "dd": 98.31,
+        "trades": 5526,
+        "pf": 0.91
+      },
+      "spread_x1.5_slip0.0": {
+        "net": -361.56,
+        "dd": 64.79,
+        "trades": 2475,
+        "pf": 0.95
+      },
+      "spread_x1.5_slip0.05": {
+        "net": -372.69,
+        "dd": 72.1,
+        "trades": 2468,
+        "pf": 0.95
+      },
+      "spread_x1.5_slip0.1": {
+        "net": -394.39,
+        "dd": 75.21,
+        "trades": 2518,
+        "pf": 0.95
+      },
+      "spread_x2.0_slip0.0": {
+        "net": -215.86,
+        "dd": 56.65,
+        "trades": 920,
+        "pf": 0.93
+      },
+      "spread_x2.0_slip0.05": {
+        "net": -321.6,
+        "dd": 59.18,
+        "trades": 918,
+        "pf": 0.9
+      },
+      "spread_x2.0_slip0.1": {
+        "net": -336.57,
+        "dd": 63.24,
+        "trades": 925,
+        "pf": 0.91
+      }
+    },
+    "safe(shipped)": {
+      "spread_x0.5_slip0.0": {
+        "net": 7439.83,
+        "dd": 2.5,
+        "trades": 15115,
+        "pf": 1.69
+      },
+      "spread_x0.5_slip0.05": {
+        "net": 6767.43,
+        "dd": 2.52,
+        "trades": 14902,
+        "pf": 1.63
+      },
+      "spread_x0.5_slip0.1": {
+        "net": 6018.22,
+        "dd": 2.54,
+        "trades": 14649,
+        "pf": 1.57
+      },
+      "spread_x1.0_slip0.0": {
+        "net": 474.41,
+        "dd": 4.35,
+        "trades": 1202,
+        "pf": 1.33
+      },
+      "spread_x1.0_slip0.05": {
+        "net": 89.25,
+        "dd": 3.95,
+        "trades": 397,
+        "pf": 1.18
+      },
+      "spread_x1.0_slip0.1": {
+        "net": 142.56,
+        "dd": 4.26,
+        "trades": 681,
+        "pf": 1.17
+      },
+      "spread_x1.5_slip0.0": {
+        "net": -24.43,
+        "dd": 5.34,
+        "trades": 115,
+        "pf": 0.89
+      },
+      "spread_x1.5_slip0.05": {
+        "net": -25.65,
+        "dd": 5.36,
+        "trades": 113,
+        "pf": 0.88
+      },
+      "spread_x1.5_slip0.1": {
+        "net": -27.95,
+        "dd": 5.48,
+        "trades": 100,
+        "pf": 0.86
+      },
+      "spread_x2.0_slip0.0": {
+        "net": -33.7,
+        "dd": 5.27,
+        "trades": 36,
+        "pf": 0.64
+      },
+      "spread_x2.0_slip0.05": {
+        "net": -35.08,
+        "dd": 5.37,
+        "trades": 36,
+        "pf": 0.63
+      },
+      "spread_x2.0_slip0.1": {
+        "net": -36.46,
+        "dd": 5.48,
+        "trades": 36,
+        "pf": 0.62
+      }
+    },
+    "TUNED": {
+      "spread_x0.5_slip0.0": {
+        "net": 22412.64,
+        "dd": 2.01,
+        "trades": 46524,
+        "pf": 1.69
+      },
+      "spread_x0.5_slip0.05": {
+        "net": 20132.27,
+        "dd": 2.05,
+        "trades": 46403,
+        "pf": 1.61
+      },
+      "spread_x0.5_slip0.1": {
+        "net": 17898.99,
+        "dd": 2.43,
+        "trades": 46401,
+        "pf": 1.54
+      },
+      "spread_x1.0_slip0.0": {
+        "net": 8747.17,
+        "dd": 6.04,
+        "trades": 22107,
+        "pf": 1.35
+      },
+      "spread_x1.0_slip0.05": {
+        "net": 7699.39,
+        "dd": 6.91,
+        "trades": 22075,
+        "pf": 1.31
+      },
+      "spread_x1.0_slip0.1": {
+        "net": 6646.14,
+        "dd": 6.63,
+        "trades": 22015,
+        "pf": 1.27
+      },
+      "spread_x1.5_slip0.0": {
+        "net": 3774.23,
+        "dd": 8.44,
+        "trades": 7440,
+        "pf": 1.33
+      },
+      "spread_x1.5_slip0.05": {
+        "net": 3441.83,
+        "dd": 8.79,
+        "trades": 7441,
+        "pf": 1.3
+      },
+      "spread_x1.5_slip0.1": {
+        "net": 3020.61,
+        "dd": 9.02,
+        "trades": 7343,
+        "pf": 1.26
+      },
+      "spread_x2.0_slip0.0": {
+        "net": 1780.15,
+        "dd": 10.31,
+        "trades": 2515,
+        "pf": 1.37
+      },
+      "spread_x2.0_slip0.05": {
+        "net": 1669.99,
+        "dd": 10.76,
+        "trades": 2497,
+        "pf": 1.35
+      },
+      "spread_x2.0_slip0.1": {
+        "net": 1548.47,
+        "dd": 12.51,
+        "trades": 2479,
+        "pf": 1.32
+      }
+    }
+  },
+  "tuned_anatomy": {
+    "trades": 22107,
+    "win_rate": 78.9,
+    "avg_win": 1.919,
+    "avg_loss": -5.312,
+    "best": 18.0,
+    "worst": -28.01,
+    "median_bars": 1,
+    "mean_bars": 1.96,
+    "by_reason": {
+      "health": {
+        "count": 766,
+        "mean": -4.54,
+        "sum": -3479.91
+      },
+      "sl": {
+        "count": 21221,
+        "mean": 0.53,
+        "sum": 11207.36
+      },
+      "tp": {
+        "count": 120,
+        "mean": 8.5,
+        "sum": 1019.85
+      }
+    },
+    "lot_counts": {
+      "0.01": 22100,
+      "0.02": 7
+    },
+    "spread_cost_paid": 9888.9,
+    "gross_profit": 33489.97,
+    "gross_loss": 24742.67,
+    "equity_start": 1000.0,
+    "equity_end": 9747.17
+  },
+  "tuned_by_month": {
+    "2026-05": {
+      "count": 3481,
+      "sum": 1481.97
+    },
+    "2026-06": {
+      "count": 9667,
+      "sum": 4049.67
+    },
+    "2026-07": {
+      "count": 5938,
+      "sum": 2096.58
+    },
+    "2026-08": {
+      "count": 3021,
+      "sum": 1119.07
+    }
+  },
+  "tuned_equity": {
+    "start": 1003.2240549999997,
+    "end": 9747.166710772843,
+    "max": 9774.901491445107,
+    "min": 999.9516001677566
+  }
+}
