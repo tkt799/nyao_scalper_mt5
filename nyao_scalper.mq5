@@ -169,16 +169,16 @@ input bool HedgeAutoLot = true;                           // Auto-size Hedge Lot
 input double HedgeRecoveryATR = 1.0;                      // Favorable Move (ATR) to Recover Within
 input double HedgeLotMultiplier = 2.0;                    // Fixed Hedge Lot Multiplier (Auto-size OFF)
 input double HedgeMaxLot = 0.10;                          // Hard Lot Ceiling Per Hedge Leg
-input double HedgeRecoveryPct = 110.0;                    // Close Older Leg When Hedge Covers This % Loss
-input double HedgeRollMinProfit = 0.5;                    // Min Older-Leg Profit ($) to Roll
+input double HedgeRecoveryPct = 100.0;                    // Close Older Leg When Hedge Covers This % Loss
+input double HedgeRollMinProfit = 0.0;                    // Min Older-Leg Profit ($) to Roll
 input int HedgeCycleLevels = 2;                           // Max Hedge Levels Per Cycle Before Reseed
-input bool EnableHedgeCycleReset = false;                 // Reseed New Cycle at Limit (else Close Chain)
+input bool EnableHedgeCycleReset = true;                  // Reseed New Cycle at Limit (else Close Chain)
 input double HedgeCyclePartialPct = 50.0;                 // % of Deepest Hedge to Close at Reseed
 input int HedgeMaxCycles = 3;                             // Max Cycles Before Closing Chain (0 = Unlimited)
 input double HedgeMaxChainLossUSD = 0.0;                  // Close Chain if Loss >= this $ (0 = Off)
 input double HedgeMaxChainLossPct = 0.0;                  // Close Chain if Loss >= this % Equity (0 = Off)
 input bool HedgeClearRootSL = true;                       // Clear First Position SL on Chain Start
-input double HedgeTrailATR = 0.5;                         // Graduated Hedge Trail Distance (ATR; 0 = normal trailing)
+input double HedgeTrailATR = 1.0;                         // Graduated Hedge Trail Distance (ATR; 0 = normal trailing)
 
 input group "🧮 Dynamic Lot Sizing Settings"
 input bool EnableDynamicLots = true;                      // Enable Dynamic Lot Sizing
@@ -209,7 +209,7 @@ input double TPValue = 10.0;                              // TP Value
 input group "📉 Stop Loss Settings"
 input bool EnableStopLoss = true;                         // Enable Stop Loss
 input ENUM_INPUT_TYPE SLInputType = INPUT_PERCENT;        // SL Input Type
-input double SLValue = 10.0;                              // SL Value
+input double SLValue = 1.0;                               // SL Value
 
 input group "⚖️ Risk:Reward Settings"
 input bool EnableRiskReward = false;                      // Enable Independent R:R SL/TP (overrides manual SL & TP)
@@ -314,6 +314,7 @@ struct SignalStrength
     double rejection;                                     // Wick to body ratio
     double penaltyBody;                                   // Penalty from body ratio
     double penaltyWick;                                   // Penalty from wick rejection
+    double rawClosedScore;                                // Raw score of last closed candle [1]
     double finalScore;                                    // 0.00-10.00 Score
     double trendScore;                                    // Trend Component (0-3)
     double momentumScore;                                 // Momentum Component (0-3)
@@ -421,6 +422,13 @@ struct TradeStats
     double maxLoss;                                       // Largest single loss (most negative)
     double minLoss;                                       // Smallest single loss (closest to 0)
 };
+
+// Dashboard Performance Cache (invalidated on init / deal events)
+bool _dashStatsValid = false;
+TradeStats _cachedDashAllTimeStats;
+ulong _lastDashUpdateTickMs = 0;
+string _lastDashStatus = "";
+datetime _lastDashBarTime = 0;
 
 // +------------------------------------------------------------------+
 // | Create Password Dialog                                           |
@@ -579,7 +587,12 @@ int InitializeEA()
     minEquityTriggersExceeded = false;
     minEquityTriggerCount = 0;
     isPaused = false;
+    currentPauseDuration = 0;
     pauseStartTime = 0;
+    isOutsideTradingHours = false;
+    isLeverageDiffFromInitial = false;
+    isNearMarketClose = false;
+    marketCloseAlertSent = false;
     lastProcessedNewsEventID = 0;
     startTime = TimeCurrent();
     lastDailyReportTime = 0;
@@ -591,6 +604,11 @@ int InitializeEA()
     initialLeverage = AccountInfoInteger(ACCOUNT_LEVERAGE);
     isOrderSendLocked = false;
     algoTradingStatus = TerminalInfoInteger(TERMINAL_TRADE_ALLOWED);
+    _dashStatsValid = false;
+    _lastDashUpdateTickMs = 0;
+    _lastDashStatus = "";
+    _lastDashBarTime = 0;
+    Comment("");
     
     // Initialize managed positions array
     ArrayResize(managedPositions, 0);
@@ -729,7 +747,7 @@ void OnTick()
         CloseAllPositions();
         DisableAlgoTrading();
         LogPrint("[STOPPED] Trading stopped.");
-        UpdateDashboard();
+        UpdateDashboard(true);
         return;
     }
 
@@ -750,6 +768,7 @@ void OnTick()
         // Recalculate Score(1) which is the just-closed candle
         // We can't trust the live variable, so we re-calc
         lastBuySignalScorePrev = lastBuySignalScore;
+        lastSellSignalScorePrev = lastSellSignalScore;
         
         // Update Buy Stats
         SignalStrength buyStr = GetSignalStrength(ORDER_TYPE_BUY);
@@ -819,14 +838,17 @@ void OnTick()
         }
         else
         {
-            // Pause period ended - reset flag and resume trading
+            // Pause period ended - capture duration for log/alert, then reset pause state
+            int endedPauseDuration = currentPauseDuration;
             isPaused = false;
+            currentPauseDuration = 0;
+            pauseStartTime = 0;
 
             double currentEquity = AccountInfoDouble(ACCOUNT_EQUITY);
 
             LogPrint("+-----------------------------------------+");
             LogPrint("PAUSE PERIOD ENDED");
-            LogPrint("Trading RESUMED after ", currentPauseDuration, " minutes");
+            LogPrint("Trading RESUMED after ", endedPauseDuration, " minutes");
             LogPrint("Current Equity: $", currentEquity);
             LogPrint("+-----------------------------------------+");
             
@@ -836,7 +858,7 @@ void OnTick()
                 string alertMsg = "**Instrument:** " + _Symbol + "\n";
                 alertMsg += "**Timeframe:** " + EnumToString(_Period) + "\n";
                 alertMsg += "**Server Time:** " + TimeToString(TimeTradeServer(), TIME_DATE|TIME_SECONDS) + "\n";
-                alertMsg += "**Pause Duration:** " + IntegerToString(currentPauseDuration) + " minutes\n";
+                alertMsg += "**Pause Duration:** " + IntegerToString(endedPauseDuration) + " minutes\n";
                 alertMsg += "**Current Equity:** $" + DoubleToString(currentEquity, 2) + "\n";
                 alertMsg += "**Peak Equity:** $" + DoubleToString(peakEquity, 2) + "\n";
                 alertMsg += "**Action:** Trading Resumed";
@@ -985,6 +1007,9 @@ void OnTradeTransaction(const MqlTradeTransaction &trans,
 
     // POSITION CLOSED (full close accounting)
     if(dealEntry != DEAL_ENTRY_OUT && dealEntry != DEAL_ENTRY_INOUT) return;
+
+    // Invalidate dashboard trade-stats cache on any closing deal (partial or full)
+    _dashStatsValid = false;
 
     // Partial close — the position is still open (reduced volume); no full-close accounting
     if(PositionSelectByTicket(posID)) return;
@@ -1715,6 +1740,7 @@ SignalStrength GetSignalStrength(ENUM_ORDER_TYPE orderType)
     strength.rejection = 0;
     strength.penaltyBody = 0;
     strength.penaltyWick = 0;
+    strength.rawClosedScore = 0;
     strength.reasoning = "";
     
     bool isBuy = (orderType == ORDER_TYPE_BUY);
@@ -1738,6 +1764,7 @@ SignalStrength GetSignalStrength(ENUM_ORDER_TYPE orderType)
         double score_i = (i == 1)
             ? ComputeRawScore(orderType, i, strength, true)
             : ComputeRawScore(orderType, i);
+        if(i == 1) strength.rawClosedScore = score_i;
         double weight = (double)(N - i + 1); // Linear decay
         weightedSum += score_i * weight;
         weightTotal += weight;
@@ -2093,11 +2120,15 @@ void ManageLosingPositions()
         // Skip all management during grace period
         if(health.inGracePeriod) continue;
         
-        // 1. BREAK-EVEN LOCK (when profit exceeds spread cost)
+        // 1. BREAK-EVEN LOCK (when profit exceeds spread cost in account currency)
         if(EnableBreakEvenOnSpread && !managedPositions[posIndex].breakEvenLocked)
         {
-            double spreadPoints = (double)SymbolInfoInteger(_Symbol, SYMBOL_SPREAD) * _Point;
-            double spreadCost = spreadPoints * volume * SymbolInfoDouble(_Symbol, SYMBOL_TRADE_CONTRACT_SIZE);
+            double spreadPrice = (double)SymbolInfoInteger(_Symbol, SYMBOL_SPREAD) * _Point;
+            double tickVal = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_VALUE);
+            double tickSz  = SymbolInfoDouble(_Symbol, SYMBOL_TRADE_TICK_SIZE);
+            double spreadCost = (tickVal > 0 && tickSz > 0)
+                ? (spreadPrice / tickSz) * tickVal * volume
+                : spreadPrice * volume * SymbolInfoDouble(_Symbol, SYMBOL_TRADE_CONTRACT_SIZE);
             double breakEvenTrigger = spreadCost * BreakEvenSpreadMultiplier;
             
             if(profit > breakEvenTrigger)
@@ -2747,10 +2778,10 @@ void ManageTrailingTPSL(ulong ticket)
                 calculatedSL = currentPrice - trailingDistancePrice;
                 double maxAllowedSL = SymbolInfoDouble(_Symbol, SYMBOL_BID) - minDistance;
                 
-                if(calculatedSL > maxAllowedSL) calculatedSL = maxAllowedSL;
-                
-                // Break-even lock
+                // Break-even lock first, then clamp to broker stop/freeze distance
                 if(TrailingEnableBreakEvenLock && calculatedSL < breakEvenPrice) calculatedSL = breakEvenPrice;
+                
+                if(calculatedSL > maxAllowedSL) calculatedSL = maxAllowedSL;
                 
                 // Only modify if moving UP
                 if(currentSL == 0 || calculatedSL > currentSL)
@@ -2772,10 +2803,10 @@ void ManageTrailingTPSL(ulong ticket)
                 calculatedSL = currentPrice + trailingDistancePrice;
                 double minAllowedSL = SymbolInfoDouble(_Symbol, SYMBOL_ASK) + minDistance;
                 
-                if(calculatedSL < minAllowedSL) calculatedSL = minAllowedSL;
-                
-                // Break-even lock
+                // Break-even lock first, then clamp to broker stop/freeze distance
                 if(TrailingEnableBreakEvenLock && calculatedSL > breakEvenPrice) calculatedSL = breakEvenPrice;
+                
+                if(calculatedSL < minAllowedSL) calculatedSL = minAllowedSL;
                 
                 // Only modify if moving DOWN
                 if(currentSL == 0 || calculatedSL < currentSL)
@@ -2803,13 +2834,15 @@ void ManageTrailingTPSL(ulong ticket)
             double lockDist = (lockProfit / volume) * (ts / tv);   // dollars -> price distance
             double bidNow = SymbolInfoDouble(_Symbol, SYMBOL_BID);
             double askNow = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+            double minLockDist = MathMax(SymbolInfoInteger(_Symbol, SYMBOL_TRADE_STOPS_LEVEL),
+                                         SymbolInfoInteger(_Symbol, SYMBOL_TRADE_FREEZE_LEVEL)) * _Point;
             double baseSL = shouldModifySL ? newSL : currentSL;
 
             if(posType == POSITION_TYPE_BUY)
             {
                 double lockPrice = NormalizeDouble(entryPrice + lockDist, _Digits);
                 // Raise the SL up to the lock (but keep an already-better trailed SL)
-                if(lockPrice > baseSL && lockPrice < bidNow)
+                if(lockPrice > baseSL && lockPrice < bidNow - minLockDist)
                 {
                     newSL = lockPrice;
                     shouldModifySL = true;
@@ -2819,7 +2852,7 @@ void ManageTrailingTPSL(ulong ticket)
             {
                 double lockPrice = NormalizeDouble(entryPrice - lockDist, _Digits);
                 // Cap the SL down to the lock (but keep an already-better trailed SL)
-                if((baseSL == 0 || lockPrice < baseSL) && lockPrice > askNow)
+                if((baseSL == 0 || lockPrice < baseSL) && lockPrice > askNow + minLockDist)
                 {
                     newSL = lockPrice;
                     shouldModifySL = true;
@@ -3002,6 +3035,9 @@ void ProcessClosedPosition(ulong closedTicket, double closedProfit)
 {
     // Idempotency guard: if it is no longer tracked, this close was already handled
     if(GetManagedPositionIndex(closedTicket) == -1) return;
+
+    // Invalidate dashboard trade-stats cache
+    _dashStatsValid = false;
 
     // SIGNAL DAMPENING: Track consecutive losses for cooldown
     if(EnableSignalDampening)
@@ -3897,6 +3933,9 @@ void PlaceLimitEntry(ENUM_ORDER_TYPE dir, double signalScore)
             request.tp = NormalizeDouble(entry - tpPts * _Point, _Digits);
     }
 
+    // Set broker-valid filling policy for pending orders
+    request.type_filling = ResolvePendingFillingMode(request);
+
     if(OrderSend(request, result) && result.retcode == TRADE_RETCODE_DONE)
     {
         double depthPts = MathAbs(ref - entry) / _Point;
@@ -4256,6 +4295,31 @@ ENUM_ORDER_TYPE_FILLING GetFillingMode()
     return ORDER_FILLING_RETURN;
 }
 
+// Resolve a broker-compatible filling mode for pending limit orders
+ENUM_ORDER_TYPE_FILLING ResolvePendingFillingMode(MqlTradeRequest &req)
+{
+    ENUM_ORDER_TYPE_FILLING preferred = GetFillingMode();
+    if(SymbolInfoInteger(_Symbol, SYMBOL_TRADE_EXEMODE) == SYMBOL_TRADE_EXECUTION_EXCHANGE)
+        preferred = ORDER_FILLING_RETURN;
+
+    req.type_filling = preferred;
+    MqlTradeCheckResult checkRes = {};
+    if(OrderCheck(req, checkRes) || checkRes.retcode != TRADE_RETCODE_INVALID_FILL)
+        return preferred;
+
+    ENUM_ORDER_TYPE_FILLING candidates[3] = { ORDER_FILLING_RETURN, ORDER_FILLING_FOK, ORDER_FILLING_IOC };
+    for(int i = 0; i < 3; i++)
+    {
+        if(candidates[i] == preferred) continue;
+        req.type_filling = candidates[i];
+        ZeroMemory(checkRes);
+        if(OrderCheck(req, checkRes) || checkRes.retcode != TRADE_RETCODE_INVALID_FILL)
+            return candidates[i];
+    }
+
+    return preferred;
+}
+
 // Helper function to validate SL price
 bool IsSLValid(ENUM_POSITION_TYPE posType, double sl)
 {
@@ -4464,13 +4528,10 @@ double CalculateDynamicLotSize(double signalScore = 0)
 // +------------------------------------------------------------------+
 double CalculateBreakEvenPrice(ulong ticket, ENUM_POSITION_TYPE posType, double entryPrice, double volume)
 {
-    // Get current spread
-    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
-    double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
-    double spread = ask - bid;
-    
-    // Get commission using deals 
-    double commission = GetPositionRoundTripCommission(ticket);
+    // Note: BUY opens at Ask and closes at Bid; SELL opens at Bid and closes at Ask.
+    // Therefore entryPrice ALREADY reflects the entry spread (gross P/L is $0 when
+    // Bid == entryPrice for BUY, or Ask == entryPrice for SELL). Do not add spread again.
+    double commission = GetPositionRoundTripCommission(ticket, volume);
     
     // Get swap
     double swap = 0;
@@ -4492,7 +4553,7 @@ double CalculateBreakEvenPrice(ulong ticket, ENUM_POSITION_TYPE posType, double 
     double costInPrice = 0;
     double minProfitInPrice = 0;
 
-    if(tickValue != 0 && volume != 0)
+    if(tickValue > 0 && tickSize > 0 && volume > 0)
     {   
         // Convert cost to price
         costInPrice = (totalCost / volume) * (tickSize / tickValue);
@@ -4506,22 +4567,23 @@ double CalculateBreakEvenPrice(ulong ticket, ENUM_POSITION_TYPE posType, double 
     double breakEvenPrice;
     if(posType == POSITION_TYPE_BUY)
     {
-        // BUY: Entry + spread + costs
-        breakEvenPrice = entryPrice + spread + costInPrice + minProfitInPrice;
+        // BUY: Entry + commission/swap costs + min break-even profit
+        breakEvenPrice = entryPrice + costInPrice + minProfitInPrice;
     }
     else
     {
-        // SELL: Entry - spread - costs
-        breakEvenPrice = entryPrice - spread - costInPrice - minProfitInPrice;
+        // SELL: Entry - commission/swap costs - min break-even profit
+        breakEvenPrice = entryPrice - costInPrice - minProfitInPrice;
     }
     
     return NormalizeDouble(breakEvenPrice, _Digits);
 }
 
-// Get Total Commission for a position (entry + exit estimate)
-double GetPositionRoundTripCommission(ulong positionTicket)
+// Get Total Commission for a position (entry + exit estimate, scaled to remaining volume)
+double GetPositionRoundTripCommission(ulong positionTicket, double currentVolume = 0)
 {
     double entryCommission = 0.0;
+    double entryVolume = 0.0;
     
     if(!HistorySelectByPosition(positionTicket)) return 0.0;
     
@@ -4537,14 +4599,15 @@ double GetPositionRoundTripCommission(ulong positionTicket)
             if(dealEntry == DEAL_ENTRY_IN)
             {
                 entryCommission += HistoryDealGetDouble(dealTicket, DEAL_COMMISSION);
+                entryVolume += HistoryDealGetDouble(dealTicket, DEAL_VOLUME);
                 break; // Found entry, no need to continue
             }
         }
     }
     
-    // Double it to estimate round-trip (entry + exit)
-    // This is an approximation since exit commission hasn't happened yet
-    return MathAbs(entryCommission) * 2.0;
+    // Double it to estimate round-trip (entry + exit), scaled if partially closed
+    double scale = (entryVolume > 0 && currentVolume > 0) ? (currentVolume / entryVolume) : 1.0;
+    return MathAbs(entryCommission) * 2.0 * scale;
 }
 // +------------------------------------------------------------------+
 
@@ -4860,6 +4923,8 @@ void CheckPeakEquity()
         if(isPaused)
         {
             isPaused = false;
+            currentPauseDuration = 0;
+            pauseStartTime = 0;
             LogPrint("Trading RESUMED - Equity recovered above peak!");
         }
     }
@@ -5201,36 +5266,96 @@ void CheckTradingHours()
 }
 
 // +------------------------------------------------------------------+
+// | Fetch Symbol Session Window (Trade Session with Quote Fallback)  |
+// +------------------------------------------------------------------+
+bool GetSymbolSessionForDay(ENUM_DAY_OF_WEEK day, uint sessionIndex, datetime &from, datetime &to)
+{
+    if(SymbolInfoSessionTrade(_Symbol, day, sessionIndex, from, to))
+        return true;
+    return SymbolInfoSessionQuote(_Symbol, day, sessionIndex, from, to);
+}
+
+// +------------------------------------------------------------------+
 // | Check Market Close Time                                          |
+// | Note: SymbolInfoSessionTrade/Quote return time-of-day offsets    |
+// | relative to 1970.01.01 (0..86400s), so compare against today's   |
+// | elapsed seconds since midnight rather than full epoch timestamps.|
 // +------------------------------------------------------------------+
 void CheckMarketClose()
 {
-    if(!EnableMarketCloseFilter || MinutesBeforeClose <= 0) return;
+    if(!EnableMarketCloseFilter || MinutesBeforeClose <= 0)
+    {
+        isNearMarketClose = false;
+        return;
+    }
     
+    datetime currentTime = TimeTradeServer();
+    if(currentTime <= 0) currentTime = TimeCurrent();
+
     MqlDateTime dt;
-    TimeCurrent(dt);
+    TimeToStruct(currentTime, dt);
     ENUM_DAY_OF_WEEK dayOfWeek = (ENUM_DAY_OF_WEEK)dt.day_of_week;
     
-    datetime from, to;
-    datetime currentTime = TimeCurrent();
+    int currentSecOfDay = dt.hour * 3600 + dt.min * 60 + dt.sec;
+    datetime todayMidnight = currentTime - currentSecOfDay;
+    int warningWindowSec = MinutesBeforeClose * 60;
     
-    if(SymbolInfoSessionQuote(_Symbol, dayOfWeek, 0, from, to))
+    for(uint s = 0; s < 10; s++)
     {
-        int secondsUntilClose = (int)(to - currentTime);
-        int minutesUntilClose = secondsUntilClose / 60;
-        
-        if(minutesUntilClose > 0 && minutesUntilClose <= MinutesBeforeClose)
+        datetime from = 0, to = 0;
+        if(!GetSymbolSessionForDay(dayOfWeek, s, from, to))
+            break;
+
+        int fromSec = (int)(from % 86400);
+        int toSec   = (to > 0 && (to % 86400) == 0) ? 86400 : (int)(to % 86400);
+        if(toSec <= fromSec) continue;
+
+        // Only evaluate the session currently in progress
+        if(currentSecOfDay < fromSec || currentSecOfDay >= toSec)
+            continue;
+
+        // Skip zero-gap intraday session splits
+        datetime nextFrom = 0, nextTo = 0;
+        if(GetSymbolSessionForDay(dayOfWeek, s + 1, nextFrom, nextTo))
         {
-            // Send alert once per session
+            int nextFromSec = (int)(nextFrom % 86400);
+            if(nextFromSec == toSec)
+            {
+                isNearMarketClose = false;
+                return;
+            }
+        }
+
+        // If an intraday rollover break already occurred earlier today (s > 0) and
+        // this session runs to 24:00 into a 00:00 session tomorrow, midnight is seamless
+        if(s > 0 && toSec == 86400)
+        {
+            ENUM_DAY_OF_WEEK nextDay = (ENUM_DAY_OF_WEEK)((dt.day_of_week + 1) % 7);
+            datetime tomFrom = 0, tomTo = 0;
+            if(GetSymbolSessionForDay(nextDay, 0, tomFrom, tomTo) && (int)(tomFrom % 86400) == 0)
+            {
+                isNearMarketClose = false;
+                marketCloseAlertSent = false;
+                return;
+            }
+        }
+
+        int secondsUntilClose = toSec - currentSecOfDay;
+        if(secondsUntilClose > 0 && secondsUntilClose <= warningWindowSec)
+        {
+            int minutesUntilClose = (secondsUntilClose + 59) / 60; // Ceiling minutes (never 0 while >0s left)
+            datetime closeDateTime = todayMidnight + toSec;
+
+            // Send alert once per session close window
             if(!marketCloseAlertSent && EnableDiscordAlerts)
             {
                 double currentEquity = AccountInfoDouble(ACCOUNT_EQUITY);
                 
                 string alertMsg = "**Instrument:** " + _Symbol + "\n";
                 alertMsg += "**Timeframe:** " + EnumToString(_Period) + "\n";
-                alertMsg += "**Server Time:** " + TimeToString(TimeTradeServer(), TIME_DATE|TIME_SECONDS) + "\n";
+                alertMsg += "**Server Time:** " + TimeToString(currentTime, TIME_DATE|TIME_SECONDS) + "\n";
                 alertMsg += "**Market Closes In:** " + IntegerToString(minutesUntilClose) + " minutes\n";
-                alertMsg += "**Market Close Time:** " + TimeToString(to, TIME_DATE|TIME_MINUTES) + "\n";
+                alertMsg += "**Market Close Time:** " + TimeToString(closeDateTime, TIME_DATE|TIME_MINUTES) + "\n";
                 alertMsg += "**Current Equity:** $" + DoubleToString(currentEquity, 2) + "\n";
                 alertMsg += "**Peak Equity:** $" + DoubleToString(peakEquity, 2) + "\n";
                 alertMsg += "**Action:** Stopped Opening New Positions";
@@ -5239,46 +5364,23 @@ void CheckMarketClose()
                 marketCloseAlertSent = true;
             }
             
-            LogPrint("Market closes in ", minutesUntilClose, " minutes. Not opening new positions.");
+            if(!isNearMarketClose)
+            {
+                LogPrint("Market closes in ", minutesUntilClose, " minute(s) (", secondsUntilClose, "s). Not opening new positions.");
+            }
             isNearMarketClose = true;
-            return; // Already in warning window, no need to check further
-        }
-        
-        // Reset when outside warning period
-        if(minutesUntilClose > MinutesBeforeClose)
-        {
-            isNearMarketClose = false;
-            marketCloseAlertSent = false; // Also reset alert flag for next session
             return;
         }
-        
-        // Current time is past session 0 close — check session 1
-        if(currentTime >= to)
-        {
-            datetime from2, to2;
-            if(SymbolInfoSessionQuote(_Symbol, dayOfWeek, 1, from2, to2))
-            {
-                secondsUntilClose = (int)(to2 - currentTime);
-                minutesUntilClose = secondsUntilClose / 60;
-                
-                if(minutesUntilClose > 0 && minutesUntilClose <= MinutesBeforeClose)
-                {
-                    LogPrint("Market closes in ", minutesUntilClose, " minutes. Not opening new positions.");
-                    isNearMarketClose = true;
-                    return;
-                }
-                
-                if(minutesUntilClose > MinutesBeforeClose)
-                {
-                    isNearMarketClose = false;
-                    return;
-                }
-            }
-        }
+
+        // Inside an active session, outside the warning window
+        isNearMarketClose = false;
+        marketCloseAlertSent = false;
+        return;
     }
     
-    // No valid session found or market is closed
+    // No active session at current time (market closed / between sessions)
     isNearMarketClose = false;
+    marketCloseAlertSent = false;
 }
 // +------------------------------------------------------------------+
 
@@ -5288,7 +5390,11 @@ void CheckMarketClose()
 void CheckLeverageChange()
 {
     // Skip if feature is disabled
-    if(!EnableLeveragePause) return;
+    if(!EnableLeveragePause)
+    {
+        isLeverageDiffFromInitial = false;
+        return;
+    }
     
     long currentLeverage = AccountInfoInteger(ACCOUNT_LEVERAGE);
     
@@ -5324,15 +5430,16 @@ void CheckLeverageChange()
         
         CloseAllPositions(); 
     }
-    // Leverage returned to initial - check if we're paused due to leverage (currentPauseDuration == 0)
-    else if(currentLeverage == initialLeverage && isLeverageDiffFromInitial && currentPauseDuration == 0)
+    // Leverage returned to initial - clear leverage pause flag regardless of prior timed pauses
+    else if(currentLeverage == initialLeverage && isLeverageDiffFromInitial)
     {
         isLeverageDiffFromInitial = false;
         
         double currentEquity = AccountInfoDouble(ACCOUNT_EQUITY);
+        string resumeAction = isPaused ? "Leverage Restored (Timed Pause Still Active)" : "Trading Resumed";
         
         LogPrint("+-----------------------------------------+");
-        LogPrint("LEVERAGE RESTORED - TRADING RESUMED");
+        LogPrint("LEVERAGE RESTORED - ", isPaused ? "TIMED PAUSE STILL ACTIVE" : "TRADING RESUMED");
         LogPrint("Leverage: 1:", (int)currentLeverage);
         LogPrint("Current Equity: $", currentEquity);
         LogPrint("+-----------------------------------------+");
@@ -5346,7 +5453,7 @@ void CheckLeverageChange()
             alertMsg += "**Leverage:** 1:" + IntegerToString((int)currentLeverage) + "\n";
             alertMsg += "**Current Equity:** $" + DoubleToString(currentEquity, 2) + "\n";
             alertMsg += "**Peak Equity:** $" + DoubleToString(peakEquity, 2) + "\n";
-            alertMsg += "**Action:** Trading Resumed";
+            alertMsg += "**Action:** " + resumeAction;
             
             SendDiscordAlert("▶️ LEVERAGE RESTORED - TRADING RESUMED", alertMsg, 3066993); // Blue color
         }
@@ -5475,6 +5582,10 @@ void GetTradeStats(TradeStats& daily, TradeStats& allTime)
     // Daily
     if(daily.won > 0) daily.avgProfit = daily.profit / daily.won; else { daily.avgProfit = 0; daily.minProfit = 0; }
     if(daily.lost > 0) daily.avgLoss = daily.loss / daily.lost; else { daily.avgLoss = 0; daily.minLoss = 0; daily.maxLoss = 0; }
+
+    // Refresh dashboard all-time stats cache
+    _cachedDashAllTimeStats = allTime;
+    _dashStatsValid = true;
 }
 
 // Send Daily Report
@@ -5703,6 +5814,7 @@ void CheckDiscordAlert()
 // +------------------------------------------------------------------+
 void DrawDashboardLabel(string name, string text, int x, int y, int fontSize, color clr, bool bold = false)
 {
+    string fontName = bold ? "Arial Bold" : "Arial";
     if(ObjectFind(0, name) < 0)
     {
         ObjectCreate(0, name, OBJ_LABEL, 0, 0, 0);
@@ -5714,18 +5826,47 @@ void DrawDashboardLabel(string name, string text, int x, int y, int fontSize, co
         ObjectSetInteger(0, name, OBJPROP_SELECTED, false);
         ObjectSetInteger(0, name, OBJPROP_HIDDEN, true);
         ObjectSetInteger(0, name, OBJPROP_ANCHOR, ANCHOR_LEFT_UPPER);
+        ObjectSetInteger(0, name, OBJPROP_FONTSIZE, fontSize);
+        ObjectSetString(0, name, OBJPROP_FONT, fontName);
     }
-    
-    ObjectSetString(0, name, OBJPROP_TEXT, text);
-    ObjectSetInteger(0, name, OBJPROP_FONTSIZE, fontSize);
-    ObjectSetInteger(0, name, OBJPROP_COLOR, clr);
-    ObjectSetString(0, name, OBJPROP_FONT, bold ? "Arial Bold" : "Arial");
+
+    // Only write properties that actually changed to minimize chart redraw overhead
+    if(ObjectGetInteger(0, name, OBJPROP_YDISTANCE) != y)
+        ObjectSetInteger(0, name, OBJPROP_YDISTANCE, y);
+    if(ObjectGetString(0, name, OBJPROP_TEXT) != text)
+        ObjectSetString(0, name, OBJPROP_TEXT, text);
+    if((color)ObjectGetInteger(0, name, OBJPROP_COLOR) != clr)
+        ObjectSetInteger(0, name, OBJPROP_COLOR, clr);
 }
 
-void UpdateDashboard()
+void UpdateDashboard(bool force = false)
 {
-    // Clear old comment based dashboard
-    Comment("");
+    // Skip chart object rendering completely in non-visual Strategy Tester runs
+    if(MQLInfoInteger(MQL_TESTER) && !MQLInfoInteger(MQL_VISUAL_MODE))
+        return;
+
+    // Status logic (evaluated before throttle so state transitions render immediately)
+    string status = "Active";
+    color statusColor = clrLime;
+    if(targetEquityReached) { status = "STOPPED (Target)"; statusColor = clrRed; }
+    else if(minimumEquityReached) { status = "STOPPED (Min Equity)"; statusColor = clrRed; }
+    else if(minEquityTriggersExceeded) { status = "STOPPED (Max DD Triggers)"; statusColor = clrRed; }
+    else if(isLeverageDiffFromInitial) { status = "PAUSED (Leverage)"; statusColor = clrOrange; }
+    else if(isPaused) { status = "PAUSED (" + IntegerToString(currentPauseDuration) + "m)"; statusColor = clrOrange; }
+    else if(isOutsideTradingHours) { status = "Closed (Time)"; statusColor = clrGray; }
+    else if(isNearMarketClose) { status = "Closing Soon"; statusColor = clrOrange; }
+
+    // Throttle intrabar redraws to ~4 FPS unless forced, bar changed, status changed, or stats invalidated
+    ulong nowMs = GetTickCount64();
+    datetime barNow = iTime(_Symbol, _Period, 0);
+    if(!force && _dashStatsValid && status == _lastDashStatus && barNow == _lastDashBarTime
+       && (nowMs - _lastDashUpdateTickMs) < 250)
+    {
+        return;
+    }
+    _lastDashUpdateTickMs = nowMs;
+    _lastDashStatus = status;
+    _lastDashBarTime = barNow;
 
     // Layout Constants
     int startX = 20;
@@ -5739,23 +5880,12 @@ void UpdateDashboard()
     color colorText = clrWhite;
     color colorBuy = clrLime;
     color colorSell = clrRed;
-    color colorNeutral = clrGray;
-    color colorBg = C'30,30,30';
-    color colorBorder = clrGold;
 
     int currentY = startY;
 
     // Header
     DrawDashboardLabel("NyaoDash_Title", "Nyao Scalper v43.0", startX, currentY, 11, colorHeader, true);
     currentY += lineHeight + 5;
-
-    // Status logic
-    string status = "Active";
-    color statusColor = clrLime;
-    if(isPaused) { status = "PAUSED (" + IntegerToString(currentPauseDuration) + "m)"; statusColor = clrOrange; }
-    else if(isOutsideTradingHours) { status = "Closed (Time)"; statusColor = clrGray; }
-    else if(targetEquityReached) { status = "STOPPED (Target)"; statusColor = clrRed; }
-    else if(minimumEquityReached) { status = "STOPPED (Min Equity)"; statusColor = clrRed; }
 
     DrawDashboardLabel("NyaoDash_Status", "Status: " + status, startX, currentY, textsize, statusColor, true);
     currentY += lineHeight;
@@ -5799,17 +5929,16 @@ void UpdateDashboard()
     }
     else
     {
-        // Hide stale label when feature is toggled off
-        ObjectDelete(0, "NyaoDash_Hedge");
+        // Hide stale label when feature is toggled off (avoid calling ObjectDelete if already absent)
+        if(ObjectFind(0, "NyaoDash_Hedge") >= 0)
+            ObjectDelete(0, "NyaoDash_Hedge");
     }
 
-    // Signal Strength (Smoothed - Unified)
+    // Signal Strength (reuses per-tick cached SignalStrength + embedded closed-candle raw score)
     SignalStrength buyStrength = GetSignalStrength(ORDER_TYPE_BUY);
     SignalStrength sellStrength = GetSignalStrength(ORDER_TYPE_SELL);
-    
-    // Raw closed-candle scores for reference
-    double rawBuyScore = ComputeRawScore(ORDER_TYPE_BUY, 1);
-    double rawSellScore = ComputeRawScore(ORDER_TYPE_SELL, 1);
+    double rawBuyScore = buyStrength.rawClosedScore;
+    double rawSellScore = sellStrength.rawClosedScore;
 
     DrawDashboardLabel("NyaoDash_SigHead", "SIGNAL STRENGTH:", startX, currentY, headersize, colorHeader, true);
     currentY += lineHeight;
@@ -5848,9 +5977,13 @@ void UpdateDashboard()
     DrawDashboardLabel("NyaoDash_SellDet", sellDet, startX, currentY, detailsSize, colorText);
     currentY += lineHeight + 10;
 
-    // Statistics
-    TradeStats daily, allTime;
-    GetTradeStats(daily, allTime);
+    // Statistics (cached; only recomputes HistorySelect when deals change)
+    if(!_dashStatsValid)
+    {
+        TradeStats dailyTmp, allTimeTmp;
+        GetTradeStats(dailyTmp, allTimeTmp);
+    }
+    TradeStats allTime = _cachedDashAllTimeStats;
     double allTimeNetProfit = allTime.profit + allTime.loss;
     
     DrawDashboardLabel("NyaoDash_StatHead", "STATISTICS:", startX, currentY, headersize, colorHeader, true);
