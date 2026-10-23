@@ -1,5 +1,5 @@
 ; +-----------------------------------------+
-; Nyao Scalper v42.0 - SAFE PROFILE
+; Nyao Scalper v43.0 - SAFE PROFILE
 ; © Copyright Nyao Scalper by Elriz Wiraswara
 ; +-----------------------------------------+
 ; Optimized for XAUUSD M1
@@ -148,6 +148,13 @@ TPValue=5.0
 EnableStopLoss=true
 SLInputType=1
 SLValue=0.5
+; ⚖️ Risk:Reward Settings
+EnableRiskReward=false
+RRRiskMode=1
+RRRiskInputType=2
+RRRiskValue=200.0
+RRAtrMultiplier=1.5
+RiskRewardRatio=1.5
 ; 💸 Trailing TP/SL Settings
 EnableTrailing=true
 TrailingEnableBreakEvenLock=true
